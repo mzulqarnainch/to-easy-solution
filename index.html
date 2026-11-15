@@ -1,0 +1,1736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Easy Solution | B2B Growth, Outreach & Digital Marketing Agency</title>
+    <!-- 1. BROWSER TAB FAVICON LOGO -->
+    <link rel="icon" type="image/png" href="logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* ================= WARM CREAM PALETTE & RESET ================= */
+        :root {
+            --bg-cream: #FAF6F0;
+            --bg-cream-alt: #F2EBE0;
+            --bg-card: #FFFFFF;
+            --text-dark: #1C1917;
+            --text-muted: #57534E;
+            --accent-terracotta: #C86D3B;
+            --accent-amber: #D97706;
+            --accent-olive: #3F6212;
+            --border-sand: #E6DDD0;
+            --shadow-warm: 0 14px 35px rgba(28, 25, 23, 0.06);
+            --shadow-hover: 0 22px 45px rgba(200, 109, 59, 0.14);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        h1, h2, h3, .brand-title, .loader-text {
+            font-family: 'Fraunces', serif;
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            background-image: 
+                radial-gradient(circle at 12% 15%, rgba(200, 109, 59, 0.07) 0%, transparent 45%),
+                radial-gradient(circle at 88% 85%, rgba(217, 119, 6, 0.07) 0%, transparent 45%);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* ================= FULLSCREEN BLANK CREAM PRELOADER ================= */
+        #preloader {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #FAF6F0;
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        #preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .loader-wrapper {
+            position: relative;
+            width: 164px;
+            height: 164px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 26px;
+        }
+
+        .ring-clockwise {
+            position: absolute;
+            width: 164px;
+            height: 164px;
+            border-radius: 50%;
+            border: 3.5px solid transparent;
+            border-top-color: var(--accent-terracotta);
+            border-right-color: var(--accent-terracotta);
+            animation: spinClockwise 1.25s cubic-bezier(0.5, 0.1, 0.5, 0.9) infinite;
+        }
+
+        .ring-anticlockwise {
+            position: absolute;
+            width: 128px;
+            height: 128px;
+            border-radius: 50%;
+            border: 3.5px solid transparent;
+            border-bottom-color: var(--accent-olive);
+            border-left-color: var(--accent-amber);
+            animation: spinAntiClockwise 0.95s cubic-bezier(0.5, 0.1, 0.5, 0.9) infinite;
+        }
+
+        .loader-logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 70%;
+            background: #FFFFFF;
+            border: 2px solid var(--border-sand);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 10px 25px rgba(28, 25, 23, 0.08);
+            z-index: 2;
+            overflow: hidden;
+            animation: pulseLogo 1.6s ease-in-out infinite;
+        }
+
+        .loader-logo img {
+            width: 65px;
+            height: 65px;
+            object-fit: contain;
+        }
+
+        .loader-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: var(--text-dark);
+            text-align: center;
+        }
+
+        @keyframes spinClockwise {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes spinAntiClockwise {
+            0% { transform: rotate(360deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        @keyframes pulseLogo {
+            0%, 100% { transform: scale(0.96); }
+            50% { transform: scale(1.04); }
+        }
+
+        /* ================= NAVBAR ================= */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.1rem 6%;
+            background: rgba(250, 246, 240, 0.92);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border-sand);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 1.45rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .brand-logo-img {
+            width: 42px;
+            height: 42px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .brand span.highlight {
+            color: var(--accent-terracotta);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 0.5rem;
+            background: var(--bg-cream-alt);
+            padding: 6px;
+            border-radius: 50px;
+            border: 1px solid var(--border-sand);
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 8px 18px;
+            border-radius: 50px;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            display: block;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-dark);
+            background: rgba(255, 255, 255, 0.65);
+        }
+
+        .nav-links a.active {
+            color: #FFFFFF;
+            background: var(--accent-terracotta);
+            box-shadow: 0 4px 14px rgba(200, 109, 59, 0.3);
+        }
+
+        /* ================= PAGE CONTAINER & VIEWS ================= */
+        .page-container {
+            flex: 1;
+            padding: 3.5rem 6%;
+            max-width: 1340px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .page-view {
+            display: none;
+            animation: viewEnter 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .page-view.active-view {
+            display: block;
+        }
+
+        @keyframes viewEnter {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h1, .section-header h2 {
+            font-size: 2.7rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: var(--text-dark);
+        }
+
+        .highlight-word {
+            color: var(--accent-terracotta);
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            max-width: 660px;
+            margin: 0 auto;
+            font-size: 1.05rem;
+            line-height: 1.65;
+        }
+
+        .home-block {
+            margin-top: 5.5rem;
+        }
+
+        /* ================= HERO (HOME WITH PHOTO COLLAGE) ================= */
+        .hero-section {
+            display: grid;
+            grid-template-columns: 1.15fr 1fr;
+            gap: 3.5rem;
+            align-items: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 16px;
+            background: #FFFFFF;
+            border: 1px solid var(--border-sand);
+            color: var(--accent-terracotta);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 1.3rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            line-height: 1.12;
+            font-weight: 700;
+            margin-bottom: 1.3rem;
+            color: var(--text-dark);
+        }
+
+        .hero-desc {
+            color: var(--text-muted);
+            font-size: 1.08rem;
+            line-height: 1.75;
+            margin-bottom: 2rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--accent-terracotta);
+            color: #FFFFFF;
+            padding: 0.95rem 2rem;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 8px 20px rgba(200, 109, 59, 0.28);
+        }
+
+        .btn-primary:hover {
+            background: #B35C2D;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 26px rgba(200, 109, 59, 0.36);
+        }
+
+        .btn-outline {
+            background: #FFFFFF;
+            color: var(--text-dark);
+            padding: 0.95rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            border: 1px solid var(--border-sand);
+            transition: all 0.25s ease;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent-terracotta);
+            color: var(--accent-terracotta);
+            transform: translateY(-2px);
+        }
+
+        .hero-visual-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+        }
+
+        .hero-photo-card {
+            background: #FFFFFF;
+            padding: 10px;
+            border-radius: 20px;
+            border: 1px solid var(--border-sand);
+            box-shadow: var(--shadow-warm);
+            transition: transform 0.35s ease;
+        }
+
+        .hero-photo-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .hero-photo-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 14px;
+            display: block;
+        }
+
+        .hero-photo-card.tall {
+            grid-row: span 2;
+        }
+
+        .hero-photo-card.tall img {
+            height: 100%;
+            min-height: 360px;
+        }
+
+        .photo-caption {
+            padding: 10px 6px 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .photo-caption span {
+            color: var(--accent-terracotta);
+        }
+
+        /* ================= HOME STATS STRIP ================= */
+        .stats-banner {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 1.5rem;
+            margin-top: 4.5rem;
+        }
+
+        .stat-card {
+            background: #FFFFFF;
+            border: 1px solid var(--border-sand);
+            border-radius: 20px;
+            padding: 1.8rem;
+            text-align: center;
+            box-shadow: var(--shadow-warm);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-terracotta);
+        }
+
+        .stat-card h3 {
+            font-size: 2.4rem;
+            color: var(--accent-terracotta);
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-card p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            font-weight: 600;
+        }
+
+        /* ================= WHY CHOOSE US SPLIT SECTION ================= */
+        .why-us-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.15fr;
+            gap: 3rem;
+            align-items: center;
+            background: #FFFFFF;
+            border: 1px solid var(--border-sand);
+            border-radius: 26px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-warm);
+        }
+
+        .why-us-img {
+            width: 100%;
+            height: 410px;
+            object-fit: cover;
+            border-radius: 18px;
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.4rem;
+            margin-top: 1.8rem;
+        }
+
+        .feature-item {
+            background: var(--bg-cream);
+            padding: 1.2rem;
+            border-radius: 14px;
+            border: 1px solid var(--border-sand);
+        }
+
+        .feature-item i {
+            color: var(--accent-terracotta);
+            font-size: 1.2rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .feature-item h4 {
+            font-size: 1rem;
+            margin-bottom: 0.35rem;
+            color: var(--text-dark);
+        }
+
+        .feature-item p {
+            font-size: 0.86rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* ================= 4-STEP PROCESS CARDS ================= */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .process-card {
+            background: #FFFFFF;
+            border: 1px solid var(--border-sand);
+            border-radius: 20px;
+            padding: 1.8rem;
+            position: relative;
+            box-shadow: var(--shadow-warm);
+        }
+
+        .step-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: var(--bg-cream-alt);
+            color: var(--accent-terracotta);
+            font-weight: 800;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-sand);
+        }
+
+        .process-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .process-card p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+
+        /* ================= TESTIMONIAL CARDS ================= */
+        .testimonial-card {
+            background: #FFFFFF;
+            border: 1px solid var(--border-sand);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-warm);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .stars {
+            color: var(--accent-amber);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .quote-text {
+            color: var(--text-dark);
+            font-size: 0.98rem;
+            line-height: 1.65;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        .client-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .client-meta img {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--border-sand);
+        }
+
+        /* ================= BOTTOM HOME CTA BANNER ================= */
+        .cta-banner {
+            background: linear-gradient(135deg, #29211D, #1C1917);
+            color: #FAF6F0;
+            border-radius: 26px;
+            padding: 3.2rem 2.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 45px rgba(28, 25, 23, 0.18);
+        }
+
+        .cta-banner h2 {
+            font-size: 2.4rem;
+            margin-bottom: 0.9rem;
+        }
+
+        .cta-banner p {
+            color: #D6D3D1;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.65;
+        }
+
+        /* ================= PHOTO CARDS GRID (SERVICES, TEAM, PORTFOLIO, LEARNING) ================= */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .cream-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-sand);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-warm);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cream-card:hover {
+            transform: translateY(-7px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--accent-terracotta);
+        }
+
+        .card-img-wrapper {
+            position: relative;
+            width: 100%;
+            height: 195px;
+            overflow: hidden;
+            background: var(--bg-cream-alt);
+        }
+
+        .card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .cream-card:hover .card-img-wrapper img {
+            transform: scale(1.07);
+        }
+
+        .card-floating-icon {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            width: 42px;
+            height: 42px;
+            background: #FFFFFF;
+            color: var(--accent-terracotta);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-body {
+            padding: 1.6rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-body h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.6rem;
+            color: var(--text-dark);
+        }
+
+        .card-body p {
+            color: var(--text-muted);
+            font-size: 0.94rem;
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .card-action-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 1.2rem;
+            color: var(--accent-terracotta);
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: gap 0.2s ease;
+        }
+
+        .cream-card:hover .card-action-link {
+            gap: 10px;
+        }
+
+        .team-img {
+            height: 350px;
+        }
+
+        .role-tag {
+            color: var(--accent-terracotta);
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .team-contact-links {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 1.3rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-sand);
+}
+
+.team-contact-links a {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--bg-cream);
+    border: 1px solid var(--border-sand);
+    color: var(--text-dark);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.92rem;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.team-contact-links a:hover {
+    background: var(--accent-terracotta);
+    border-color: var(--accent-terracotta);
+    color: #FFFFFF;
+    transform: translateY(-2px);
+}
+
+        /* ================= PORTFOLIO FILTER TABS ================= */
+        .filter-bar {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: #FFFFFF;
+            border: 1px solid var(--border-sand);
+            color: var(--text-muted);
+            padding: 9px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.88rem;
+            transition: all 0.25s ease;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--accent-terracotta);
+            border-color: var(--accent-terracotta);
+            color: #FFFFFF;
+        }
+
+        .metric-badge {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 6px 12px;
+            border-radius: 8px;
+            background: #ECFDF5;
+            border: 1px solid #A7F3D0;
+            color: #065F46;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        /* ================= LEARNING MODAL ================= */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(28, 25, 23, 0.6);
+            backdrop-filter: blur(6px);
+            z-index: 5000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+            animation: viewEnter 0.3s ease;
+        }
+
+        .modal-box {
+            background: #FFFFFF;
+            border: 1px solid var(--border-sand);
+            border-radius: 24px;
+            max-width: 600px;
+            width: 100%;
+            padding: 2.4rem;
+            position: relative;
+            box-shadow: 0 25px 60px rgba(28, 25, 23, 0.2);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 18px;
+            right: 22px;
+            background: var(--bg-cream);
+            border: 1px solid var(--border-sand);
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            color: var(--text-dark);
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .modal-close:hover {
+            background: var(--accent-terracotta);
+            color: #FFFFFF;
+        }
+
+        /* ================= CONTACT FORM WITH IMAGE ================= */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1.35fr;
+            gap: 2.5rem;
+            background: #FFFFFF;
+            border: 1px solid var(--border-sand);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-warm);
+        }
+
+        .contact-photo {
+            width: 100%;
+            height: 210px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.45rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            background: var(--bg-cream);
+            border: 1px solid var(--border-sand);
+            border-radius: 12px;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            transition: border-color 0.25s, background 0.25s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            background: #FFFFFF;
+            border-color: var(--accent-terracotta);
+        }
+
+        /* ================= FOOTER ================= */
+        footer {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            border-top: 1px solid var(--border-sand);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            background: var(--bg-cream-alt);
+        }
+
+        .footer-logo-img {
+            width: 38px;
+            height: 38px;
+            object-fit: contain;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+
+        .footer-socials {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 14px 0 18px;
+}
+
+.footer-socials a {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    border: 1px solid var(--border-sand);
+    color: var(--text-dark);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.05rem;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 10px rgba(28, 25, 23, 0.05);
+}
+
+.footer-socials a:hover {
+    background: var(--accent-terracotta);
+    border-color: var(--accent-terracotta);
+    color: #FFFFFF;
+    transform: translateY(-3px);
+}
+
+        @media (max-width: 920px) {
+            .hero-section, .why-us-grid, .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .feature-list {
+                grid-template-columns: 1fr;
+            }
+            .hero-title {
+                font-size: 2.6rem;
+            }
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: left;
+                border-radius: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- FULLSCREEN BLANK CREAM PRELOADER WITH CLOCKWISE & ANTI-CLOCKWISE CIRCLES -->
+    <div id="preloader">
+        <div class="loader-wrapper">
+            <div class="ring-clockwise"></div>
+            <div class="ring-anticlockwise"></div>
+            <!-- 2. PRELOADER CENTER LOGO -->
+            <div class="loader-logo">
+                <img src="logo.png" alt="To Easy Solution Logo">
+            </div>
+        </div>
+        <div class="loader-text" id="loader-text">Loading To Easy Solution......</div>
+    </div>
+
+    <!-- NAVIGATION BAR -->
+    <nav class="navbar">
+        <a class="brand" data-target="home" data-nav-label="Home">
+            <!-- 3. TOP NAVBAR LOGO -->
+            <img src="logo.png" alt="To Easy Solution" class="brand-logo-img">
+            <span class="brand-title">To Easy <span class="highlight">Solution</span></span>
+        </a>
+
+        <ul class="nav-links">
+            <li><a class="nav-item active" data-target="home" data-nav-label="Home">Home</a></li>
+            <li><a class="nav-item" data-target="services" data-nav-label="Services">Services</a></li>
+            <li><a class="nav-item" data-target="portfolio" data-nav-label="Portfolio">Portfolio</a></li>
+            <li><a class="nav-item" data-target="learning" data-nav-label="Learning">Learning</a></li>
+            <li><a class="nav-item" data-target="team" data-nav-label="Team">Team</a></li>
+            <li><a class="nav-item" data-target="contact" data-nav-label="Contact Us">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <!-- DEDICATED PAGE VIEWS (ONLY ONE SHOWN AT A TIME) -->
+    <main class="page-container">
+
+        <!-- ==================== 1. RICH HOME PAGE ==================== -->
+        <section id="page-home" class="page-view active-view">
+
+            <!-- A. HERO SECTION -->
+            <div class="hero-section">
+                <div>
+                    <div class="hero-badge">
+                        <i class="fas fa-sparkles"></i>
+                        <span>B2B Lead Generation & Paid Acquisition Studio</span>
+                    </div>
+                    <h1 class="hero-title">Smart Outreach & <span class="highlight-word">High-ROI Ads</span> Made Effortless.</h1>
+                    <p class="hero-desc">
+                        At <strong>To Easy Solution</strong>, we build predictable sales pipelines for ambitious brands combining targeted Lead Generation, Business & Sales Development, LinkedIn Outreach, Email Marketing, CRM Management, Data Entry, and Meta & Google Ads under one roof.
+                    </p>
+                    <div class="btn-group">
+                        <a class="btn-primary" data-target="services" data-nav-label="Services">
+                            Explore All Services <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a class="btn-outline" data-target="contact" data-nav-label="Contact Us">
+                            <i class="fa-brands fa-whatsapp" style="color: #25D366; font-size: 1.15rem;"></i> Get Free Quote
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Rich Photo Collage -->
+                <div class="hero-visual-grid">
+                    <div class="hero-photo-card tall">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80" alt="Business Strategy Team">
+                        <div class="photo-caption">
+                            <div>B2B Growth Strategy</div>
+                            <span>500+ Clients</span>
+                        </div>
+                    </div>
+                    <div class="hero-photo-card">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="Meta and Google Ads Analytics">
+                        <div class="photo-caption">
+                            <div>Meta & Google Ads</div>
+                            <span>3.8x ROAS</span>
+                        </div>
+                    </div>
+                    <div class="hero-photo-card">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="CRM and Data Management">
+                        <div class="photo-caption">
+                            <div>Verified B2B Leads</div>
+                            <span>250K+ Delivered</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- B. KEY METRICS BAR -->
+            <div class="stats-banner">
+                <div class="stat-card">
+                    <h3>250K+</h3>
+                    <p>Verified Decision-Maker Leads</p>
+                </div>
+                <div class="stat-card">
+                    <h3>3.8x</h3>
+                    <p>Average Meta & Google Ad ROAS</p>
+                </div>
+                <div class="stat-card">
+                    <h3>99.9%</h3>
+                    <p>CRM & Data Entry Accuracy</p>
+                </div>
+                <div class="stat-card">
+                    <h3>500+</h3>
+                    <p>Global Businesses Scaled</p>
+                </div>
+            </div>
+
+            <!-- C. CORE CAPABILITIES PREVIEW -->
+            <div class="home-block">
+                <div class="section-header">
+                    <h2>Everything You Need To <span class="highlight-word">Fill Your Pipeline</span></h2>
+                    <p>We handle the heavy lifting across outbound prospecting, CRM hygiene, and paid traffic so your team focuses on closing deals.</p>
+                </div>
+
+                <div class="grid-cards">
+                    <div class="cream-card">
+                        <div class="card-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=800&q=80" alt="Lead Generation & Sales Development">
+                            <div class="card-floating-icon"><i class="fas fa-bullseye"></i></div>
+                        </div>
+                        <div class="card-body">
+                            <h3>Lead Generation & SDRs</h3>
+                            <p>Custom B2B prospect lists, cold calling, and appointment setting tailored to your exact Ideal Customer Profile.</p>
+                            <div class="card-action-link" data-target="services" data-nav-label="Services">See All Services <i class="fas fa-arrow-right"></i></div>
+                        </div>
+                    </div>
+
+                    <div class="cream-card">
+                        <div class="card-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1611944212129-29977ae1398c?auto=format&fit=crop&w=800&q=80" alt="LinkedIn & Email Outreach">
+                            <div class="card-floating-icon"><i class="fa-brands fa-linkedin"></i></div>
+                        </div>
+                        <div class="card-body">
+                            <h3>LinkedIn & Email Outreach</h3>
+                            <p>Multi-touch personalized messaging sequences that land in primary inboxes and book qualified sales calls.</p>
+                            <div class="card-action-link" data-target="services" data-nav-label="Services">Explore Outreach <i class="fas fa-arrow-right"></i></div>
+                        </div>
+                    </div>
+
+                    <div class="cream-card">
+                        <div class="card-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=800&q=80" alt="CRM Management & Data Entry">
+                            <div class="card-floating-icon"><i class="fas fa-database"></i></div>
+                        </div>
+                        <div class="card-body">
+                            <h3>CRM & Data Operations</h3>
+                            <p>Clean, deduplicated HubSpot & Salesforce pipelines paired with 99.9% accurate web research and data entry.</p>
+                            <div class="card-action-link" data-target="services" data-nav-label="Services">View CRM Solutions <i class="fas fa-arrow-right"></i></div>
+                        </div>
+                    </div>
+
+                    <div class="cream-card">
+                        <div class="card-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&w=800&q=80" alt="Meta Ads & Google Ads">
+                            <div class="card-floating-icon"><i class="fas fa-bullhorn"></i></div>
+                        </div>
+                        <div class="card-body">
+                            <h3>Meta & Google Ads</h3>
+                            <p>Data-backed paid social and search campaigns designed to lower acquisition costs and scale inbound demand.</p>
+                            <div class="card-action-link" data-target="services" data-nav-label="Services">View Ad Management <i class="fas fa-arrow-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- D. WHY CHOOSE US SECTION -->
+            <div class="home-block">
+                <div class="why-us-grid">
+                    <img class="why-us-img" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=80" alt="To Easy Solution Dedicated Team">
+                    <div>
+                        <div class="hero-badge" style="margin-bottom: 0.9rem;">
+                            <i class="fas fa-award"></i>
+                            <span>Why Partner With Us</span>
+                        </div>
+                        <h2 style="font-size: 2.3rem; line-height: 1.2; margin-bottom: 1rem;">Built For Speed, Accuracy & Measurable ROI.</h2>
+                        <p style="color: var(--text-muted); line-height: 1.7;">
+                            Hiring, training, and managing separate specialists for lead research, cold email, CRM administration, and paid ads takes months. We plug a ready-made growth team directly into your business in days.
+                        </p>
+
+                        <div class="feature-list">
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <h4>Human-Verified Data</h4>
+                                <p>Every email and LinkedIn profile is double-verified to keep bounce rates under 1%.</p>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-sync-alt"></i>
+                                <h4>Seamless CRM Sync</h4>
+                                <p>Every lead, reply, and ad conversion updates automatically inside your CRM.</p>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-chart-bar"></i>
+                                <h4>Weekly KPI Reports</h4>
+                                <p>Clear dashboards tracking reply rates, booked calls, ad spend, and ROAS.</p>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-headset"></i>
+                                <h4>Direct WhatsApp Support</h4>
+                                <p>Fast, transparent communication with your dedicated account strategist.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- E. HOW WE WORK (4-STEP WORKFLOW) -->
+            <div class="home-block">
+                <div class="section-header">
+                    <h2>How We <span class="highlight-word">Scale Your Business</span></h2>
+                    <p>A simple 4-step process that turns cold markets into booked meetings and paying customers.</p>
+                </div>
+
+                <div class="process-grid">
+                    <div class="process-card">
+                        <div class="step-num">01</div>
+                        <h3>ICP & Funnel Audit</h3>
+                        <p>We define your ideal buyer persona, target industries, offer positioning, and campaign goals.</p>
+                    </div>
+                    <div class="process-card">
+                        <div class="step-num">02</div>
+                        <h3>Data & Tech Setup</h3>
+                        <p>We build verified prospect lists, warm outreach domains, configure CRM stages, and install ad pixels.</p>
+                    </div>
+                    <div class="process-card">
+                        <div class="step-num">03</div>
+                        <h3>Multi-Channel Launch</h3>
+                        <p>We launch personalized LinkedIn outreach, cold email sequences, and high-intent Meta & Google Ads.</p>
+                    </div>
+                    <div class="process-card">
+                        <div class="step-num">04</div>
+                        <h3>Optimize & Scale</h3>
+                        <p>We A/B test messaging and ad creatives weekly while booking qualified leads straight to your calendar.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- F. CLIENT TESTIMONIALS -->
+            <div class="home-block">
+                <div class="section-header">
+                    <h2>Trusted By <span class="highlight-word">Growing Teams</span></h2>
+                    <p>See what founders and sales directors say after partnering with To Easy Solution.</p>
+                </div>
+
+                <div class="grid-cards">
+                    <div class="testimonial-card">
+                        <div>
+                            <div class="stars">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                            <p class="quote-text">"To Easy Solution cleaned our messy HubSpot CRM of 40,000 contacts and launched a LinkedIn + cold email engine that booked 38 enterprise demos in our first 60 days."</p>
+                        </div>
+                        <div class="client-meta">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80" alt="Marcus Vance">
+                            <div>
+                                <h4 style="font-size: 0.95rem;">Marcus Vance</h4>
+                                <span style="font-size: 0.82rem; color: var(--text-muted);">VP of Sales, CloudSync B2B</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div>
+                            <div class="stars">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                            <p class="quote-text">"Their Google Ads and Meta retargeting campaigns cut our cost-per-lead nearly in half while keeping our sales reps busy every single week."</p>
+                        </div>
+                        <div class="client-meta">
+                            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80" alt="Elena Rostova">
+                            <div>
+                                <h4 style="font-size: 0.95rem;">Elena Rostova</h4>
+                                <span style="font-size: 0.82rem; color: var(--text-muted);">Founder, Crestline Properties</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div>
+                            <div class="stars">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                            <p class="quote-text">"Fast communication, 99.9% accurate lead research, and zero fluff. Outsourcing our data entry and outbound prospecting to them was our best move this year."</p>
+                        </div>
+                        <div class="client-meta">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80" alt="Daniel Brooks">
+                            <div>
+                                <h4 style="font-size: 0.95rem;">Daniel Brooks</h4>
+                                <span style="font-size: 0.82rem; color: var(--text-muted);">Managing Director, Apex Logistics</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- G. HOME BOTTOM CALL-TO-ACTION BANNER -->
+            <div class="home-block">
+                <div class="cta-banner">
+                    <h2>Ready To Accelerate Your Sales Pipeline?</h2>
+                    <p>Tell us which service you need Lead Generation, Outreach, CRM Management, or Meta & Google Ads and get a custom growth roadmap today.</p>
+                    <div class="btn-group" style="justify-content: center;">
+                        <a class="btn-primary" data-target="contact" data-nav-label="Contact Us">
+                            <i class="fa-brands fa-whatsapp" style="font-size: 1.15rem;"></i> Send WhatsApp Inquiry
+                        </a>
+                        <a class="btn-outline" data-target="portfolio" data-nav-label="Portfolio">
+                            View Client Results
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ==================== 2. SERVICES PAGE ==================== -->
+        <section id="page-services" class="page-view">
+            <div class="section-header">
+                <h1>Our Core <span class="highlight-word">Growth Services</span></h1>
+                <p>Complete outbound sales, CRM operations, and paid social media solutions tailored to scale your revenue.</p>
+            </div>
+
+            <div class="grid-cards">
+                <div class="cream-card">
+                    <div class="card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=800&q=80" alt="Lead Generation">
+                        <div class="card-floating-icon"><i class="fas fa-bullseye"></i></div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Lead Generation</h3>
+                        <p>Targeted B2B and B2C prospect lists built with verified decision-maker emails and direct contact intelligence.</p>
+                        <div class="card-action-link" onclick="bookService('Lead Generation')">Request Leads <i class="fas fa-arrow-right"></i></div>
+                    </div>
+                </div>
+
+                <div class="cream-card">
+                    <div class="card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=800&q=80" alt="Business Development">
+                        <div class="card-floating-icon"><i class="fas fa-chart-line"></i></div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Business Development</h3>
+                        <p>Market expansion roadmaps, high-value partnership outreach, and sustainable revenue growth systems.</p>
+                        <div class="card-action-link" onclick="bookService('Business Development')">Scale Business <i class="fas fa-arrow-right"></i></div>
+                    </div>
+                </div>
+
+                <div class="cream-card">
+                    <div class="card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80" alt="Sales Development">
+                        <div class="card-floating-icon"><i class="fas fa-handshake"></i></div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Sales Development</h3>
+                        <p>Dedicated SDR qualification, multi-channel follow-ups, and calendar appointment setting for your closers.</p>
+                        <div class="card-action-link" onclick="bookService('Sales Development')">Book Meetings <i class="fas fa-arrow-right"></i></div>
+                    </div>
+                </div>
+
+                <div class="cream-card">
+                    <div class="card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80" alt="Email Marketing">
+                        <div class="card-floating-icon"><i class="fas fa-envelope-open-text"></i></div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Email Marketing</h3>
+                        <p>High-deliverability cold email sequences, domain warming, and persuasive copywriting that converts.</p>
+                        <div class="card-action-link" onclick="bookService('Email Marketing')">Start Campaign <i class="fas fa-arrow-right"></i></div>
+                    </div>
+                </div>
+
+                <div class="cream-card">
+                    <div class="card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=800&q=80" alt="Data Entry">
+                        <div class="card-floating-icon"><i class="fas fa-database"></i></div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Data Entry</h3>
+                        <p>99.9% accurate data mining, web research, spreadsheet cleansing, and structured database formatting.</p>
+                        <div class="card-action-link" onclick="bookService('Data Entry')">Outsource Data <i class="fas fa-arrow-right"></i></div>
+                    </div>
+                </div>
+
+                <div class="cream-card">
+                    <div class="card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=800&q=80" alt="CRM Management">
+                        <div class="card-floating-icon"><i class="fas fa-network-wired"></i></div>
+                    </div>
+                    <div class="card-body">
+                        <h3>CRM Management</h3>
+                        <p>Full setup, lead scoring, workflow automation, and daily hygiene for HubSpot, Salesforce, and Pipedrive.</p>
+                        <div class="card-action-link" onclick="bookService('CRM Management')">Optimize CRM <i class="fas fa-arrow-right"></i></div>
+                    </div>
+                </div>
+
+                <div class="cream-card">
+                    <div class="card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1611944212129-29977ae1398c?auto=format&fit=crop&w=800&q=80" alt="LinkedIn Outreach">
+                        <div class="card-floating-icon"><i class="fa-brands fa-linkedin"></i></div>
+                    </div>
+                    <div class="card-body">
+                        <h3>LinkedIn Outreach</h3>
+                        <p>Executive profile optimization and personalized B2B connection campaigns that spark warm conversations.</p>
+                        <div class="card-action-link" onclick="bookService('LinkedIn Outreach')">Grow Network <i class="fas fa-arrow-right"></i></div>
+                    </div>
+                </div>
+
+                <div class="cream-card">
+                    <div class="card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&w=800&q=80" alt="Social Media Marketing Meta and Google Ads">
+                        <div class="card-floating-icon"><i class="fas fa-bullhorn"></i></div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Social Media Marketing (Meta & Google Ads)</h3>
+                        <p>ROI-focused paid acquisition across Facebook, Instagram, and Google Search & Display networks.</p>
+                        <div class="card-action-link" onclick="bookService('Social Media Marketing (Meta & Google Ads)')">Launch Ads <i class="fas fa-arrow-right"></i></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 3. TEAM PAGE ==================== -->
+<section id="page-team" class="page-view">
+    <div class="section-header">
+        <h1>Meet Our <span class="highlight-word">Specialists</span></h1>
+        <p>Experienced strategists in B2B lead generation, CRM automation, and Meta & Google performance marketing.</p>
+    </div>
+
+    <div class="grid-cards">
+        <!-- Team Member 1 -->
+        <div class="cream-card">
+            <div class="card-img-wrapper team-img">
+                <img src="ishfaq.png" alt="Muhammad Ishfaq">
+            </div>
+            <div class="card-body">
+                <div class="role-tag">Head of Business & Sales Development</div>
+                <h3>Muhammad Ishfaq</h3>
+                <p>Experienced business development leader with 5+ years of expertise in building multi-channel B2B sales pipelines, developing outbound strategies, and driving qualified enterprise appointments.</p>
+                <div class="team-contact-links">
+                    <a href="mailto:muhammad.ishfaq@toeasysolution.com" title="Email Alex" aria-label="Email Alex">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/muhammad-ishfaqchoudhary/" target="_blank" rel="noopener" title="LinkedIn" aria-label="Muhammad LinkedIn">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://www.upwork.com/freelancers/~01f47d4d863714634b" target="_blank" rel="noopener" title="Upwork" aria-label="Ishfaq Upwork">
+                        <i class="fa-brands fa-upwork"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Team Member 2 -->
+        <div class="cream-card">
+            <div class="card-img-wrapper team-img">
+                <img src="zulqarnain1.png" alt="Muhammad Zulqarnain">
+            </div>
+            <div class="card-body">
+                <div class="role-tag">B2B Lead Generation and MR</div>
+                <h3>Muhammad Zulqarnain</h3>
+                <p>3+ Year in B2B Lead Generation & Sales Development Specialist specializing in targeted prospect research, LinkedIn outreach, email marketing, CRM management, and qualified appointment setting.</p>
+                <div class="team-contact-links">
+                    <a href="mailto:mzulqarnainch@outlook.com" title="Email Sarah" aria-label="Email Zulqarnain">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/chmzulqarnain" target="_blank" rel="noopener" title="LinkedIn" aria-label="Zulqarnain LinkedIn">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://www.upwork.com/freelancers/~015b4bef450d508574" target="_blank" rel="noopener" title="Upwork" aria-label="Zulqarnain Upwork">
+                        <i class="fa-brands fa-upwork"></i>
+                    </a>
+                    <a href="https://www.instagram.com/___mzulqarnain___" target="_blank" rel="noopener" title="Instagram" aria-label="Zulqarnain Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Team Member 3 -->
+        <div class="cream-card">
+            <div class="card-img-wrapper team-img">
+                <img src="nazia.png" alt="Nazia Ashraf">
+            </div>
+            <div class="card-body">
+                <div class="role-tag">CRM & Data Operations Manager</div>
+                <h3>Nazia Ashraf</h3>
+                <p>Certified HubSpot & Salesforce architect specializing in 99.9% accurate data entry and workflow automation.</p>
+                <div class="team-contact-links">
+                    <a href="mailto:nazia@toeasysolution.com" title="Email Nazia" aria-label="Email Nazia">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/naziaishfaq/" target="_blank" rel="noopener" title="LinkedIn" aria-label="David LinkedIn">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 
+        <!-- ==================== 4. PORTFOLIO PAGE ==================== -->
+        <section id="page-portfolio" class="page-view">
+            <div class="section-header">
+                <h1>Proven <span class="highlight-word">Case Studies</span></h1>
+                <p>Real growth outcomes delivered for our clients across outreach, paid media, and data management.</p>
+            </div>
+
+            <div class="filter-bar">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="outreach">Lead Gen & Outreach</button>
+                <button class="filter-btn" data-filter="ads">Meta & Google Ads</button>
+                <button class="filter-btn" data-filter="crm">CRM & Data Entry</button>
+            </div>
+
+            <div class="grid-cards">
+                <div class="cream-card portfolio-item" data-category="outreach">
+                    <div class="card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80" alt="FinTech SaaS Pipeline">
+                    </div>
+                    <div class="card-body">
+                        <div class="role-tag">LinkedIn & Email Outreach</div>
+                        <h3>FinTech B2B SaaS Pipeline</h3>
+                        <p>Curated 12,000 verified C-level prospects and executed personalized LinkedIn and email sequences.</p>
+                        <span class="metric-badge">+145 Qualified Demos in 90 Days</span>
+                    </div>
+                </div>
+
+                <div class="cream-card portfolio-item" data-category="ads">
+                    <div class="card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80" alt="Real Estate Lead Funnel">
+                    </div>
+                    <div class="card-body">
+                        <div class="role-tag">Meta Ads & Google Ads</div>
+                        <h3>Real Estate Buyer Acquisition</h3>
+                        <p>Combined high-intent Google Search campaigns with dynamic Instagram and Facebook retargeting.</p>
+                        <span class="metric-badge">-48% Cost Per Lead | 4.2x ROAS</span>
+                    </div>
+                </div>
+
+                <div class="cream-card portfolio-item" data-category="crm">
+                    <div class="card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" alt="HubSpot CRM Migration">
+                    </div>
+                    <div class="card-body">
+                        <div class="role-tag">CRM Management & Data Entry</div>
+                        <h3>Enterprise HubSpot Cleanup</h3>
+                        <p>Deduplicated, enriched, and migrated 50,000+ legacy contacts into automated sales pipelines.</p>
+                        <span class="metric-badge">50,000+ Records (99.9% Accuracy)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 5. LEARNING PAGE ==================== -->
+        <section id="page-learning" class="page-view">
+            <div class="section-header">
+                <h1>To Easy <span class="highlight-word">Learning Hub</span></h1>
+                <p>Practical guides and step-by-step frameworks from our outbound and paid advertising specialists.</p>
+            </div>
+
+            <div class="grid-cards">
+                <div class="cream-card">
+                    <div class="card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80" alt="Cold Email Playbook">
+                    </div>
+                    <div class="card-body">
+                        <h3>Cold Email Deliverability Guide</h3>
+                        <p>Learn domain warming, SPF/DKIM/DMARC authentication, and copy frameworks for 50%+ open rates.</p>
+                        <div class="card-action-link" onclick="openGuide('Cold Email Deliverability Guide', '1. Use secondary outreach domains to protect your main company domain.\n2. Configure SPF, DKIM, and DMARC DNS records properly.\n3. Warm mailboxes for 14–21 days before launching campaigns.\n4. Keep messages concise (under 85 words) with a clear, low-friction question.')">
+                            Read Full Guide <i class="fas fa-book-open"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cream-card">
+                    <div class="card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?auto=format&fit=crop&w=800&q=80" alt="Meta and Google Ads Blueprint">
+                    </div>
+                    <div class="card-body">
+                        <h3>Meta & Google Ads Blueprint</h3>
+                        <p>How to capture high-intent search traffic and retarget prospects profitably on Facebook & Instagram.</p>
+                        <div class="card-action-link" onclick="openGuide('Meta & Google Ads Blueprint', '1. Target high-intent commercial keywords on Google Search first.\n2. Set up accurate conversion tracking (Meta Pixel + CAPI & Google Tag).\n3. Retarget warm visitors on Meta with client case studies and testimonials.\n4. Scale winning campaigns gradually by 20% every 48 hours.')">
+                            Read Full Guide <i class="fas fa-book-open"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cream-card">
+                    <div class="card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="CRM Hygiene">
+                    </div>
+                    <div class="card-body">
+                        <h3>CRM Hygiene & Automation</h3>
+                        <p>Keep your sales pipeline spotless with standardized lead tagging, stage triggers, and clean data entry.</p>
+                        <div class="card-action-link" onclick="openGuide('CRM Hygiene & Automation', '1. Tag every incoming lead by exact acquisition source.\n2. Automate follow-up reminders so no warm prospect slips through.\n3. Enforce required fields before moving deals across pipeline stages.\n4. Schedule monthly deduplication and data enrichment audits.')">
+                            Read Full Guide <i class="fas fa-book-open"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 6. CONTACT US PAGE (WHATSAPP DIRECT) ==================== -->
+        <section id="page-contact" class="page-view">
+            <div class="section-header">
+                <h1>Let's <span class="highlight-word">Grow Together</span></h1>
+                <p>Fill out your details below and send your inquiry directly to our team on WhatsApp for an instant response.</p>
+            </div>
+
+            <div class="contact-wrapper">
+                <div>
+                    <img class="contact-photo" src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=800&q=80" alt="To Easy Solution Team Consultation">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 0.8rem;">Get In Touch</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.6;">
+                        Ready to delegate your Lead Generation, LinkedIn Outreach, CRM Management, or Meta & Google Ads? Message us directly.
+                    </p>
+                    <p style="margin-bottom: 0.9rem;"><i class="fas fa-envelope" style="color: var(--accent-terracotta); margin-right: 10px;"></i> info@toeasysolution.com</p>
+                    <p style="margin-bottom: 0.9rem;"><i class="fa-brands fa-whatsapp" style="color: #25D366; margin-right: 10px; font-size: 1.1rem;"></i> +92 300 8285784</p>
+                    <p><i class="fas fa-clock" style="color: var(--accent-terracotta); margin-right: 10px;"></i> Mon – Sat: 9:00 AM – 01:00 AM</p>
+                </div>
+
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="name" required placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label>Work Email</label>
+                        <input type="email" id="email" required placeholder="you@company.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Service Needed</label>
+                        <select id="serviceSelect">
+                            <option value="Lead Generation">Lead Generation</option>
+                            <option value="Business Development">Business Development</option>
+                            <option value="Sales Development">Sales Development</option>
+                            <option value="Email Marketing">Email Marketing</option>
+                            <option value="LinkedIn Page Verification">LinkedIn Page Verification</option>
+                            <option value="Email Find">Email Find</option>
+                            <option value="Data Entry">Data Entry</option>
+                            <option value="CRM Management">CRM Management</option>
+                            <option value="LinkedIn Outreach">LinkedIn Outreach</option>
+                            <option value="Social Media Marketing (Meta & Google Ads)">Social Media Marketing (Meta & Google Ads)</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Project Details</label>
+                        <textarea id="message" rows="4" required placeholder="Tell us about your target audience, CRM, or ad goals..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; background: #25D366; box-shadow: 0 8px 20px rgba(37, 211, 102, 0.28);">
+                        <i class="fa-brands fa-whatsapp" style="font-size: 1.2rem;"></i> Send Inquiry via WhatsApp
+                    </button>
+                    <p id="formResponse" style="margin-top: 1rem; color: var(--accent-olive); font-weight: 700;"></p>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- LEARNING GUIDE MODAL -->
+    <div class="modal-overlay" id="guideModal">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeGuide()"><i class="fas fa-times"></i></button>
+            <span class="hero-badge" style="margin-bottom: 0.8rem;">To Easy Solution Playbook</span>
+            <h2 id="modalTitle" style="margin-bottom: 1rem; font-size: 1.6rem;"></h2>
+            <p id="modalBody" style="color: var(--text-muted); line-height: 1.8; white-space: pre-line;"></p>
+        </div>
+    </div>
+
+    <!-- FOOTER WITH LOGO & SOCIAL LINKS -->
+<footer>
+    <img src="logo.png" alt="To Easy Solution" class="footer-logo-img">
+    <h4 style="font-family: 'Fraunces', serif; color: var(--text-dark); font-size: 1.15rem;">To Easy Solution</h4>
+
+    <div class="footer-socials">
+        <a href="https://www.linkedin.com/company/to-easy-solution" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <i class="fa-brands fa-linkedin-in"></i>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=61571688200284" target="_blank" rel="noopener" aria-label="Facebook">
+            <i class="fa-brands fa-facebook-f"></i>
+        </a>
+        <a href="https://www.instagram.com/muhammad_ixshfaq/" target="_blank" rel="noopener" aria-label="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://wa.me/923008285784" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="mailto:info@toeasysolution.com" title="To Easy Solution" aria-label="To Easy Solution">
+                        <i class="fas fa-envelope"></i> </a>
+    </div>
+
+    <p>&copy; 2026 To Easy Solution. All Rights Reserved. | Lead Generation • Outreach • CRM • Meta & Google Ads</p>
+</footer>
+
+    <script>
+        const preloader = document.getElementById("preloader");
+        const loaderText = document.getElementById("loader-text");
+        const navItems = document.querySelectorAll(".nav-item");
+        const pageViews = document.querySelectorAll(".page-view");
+
+        function navigateToPage(targetId, pageLabel) {
+            loaderText.textContent = `Loading ${pageLabel}......`;
+            preloader.classList.remove("hidden");
+
+            setTimeout(() => {
+                pageViews.forEach(view => view.classList.remove("active-view"));
+                const activeSection = document.getElementById(`page-${targetId}`);
+                if (activeSection) activeSection.classList.add("active-view");
+
+                navItems.forEach(item => {
+                    item.classList.toggle("active", item.getAttribute("data-target") === targetId);
+                });
+
+                window.scrollTo(0, 0);
+                preloader.classList.add("hidden");
+            }, 680);
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // Initial load / browser refresh shows "Loading To Easy Solution......"
+            loaderText.textContent = "Loading To Easy Solution......";
+            setTimeout(() => {
+                preloader.classList.add("hidden");
+            }, 950);
+
+            document.querySelectorAll("[data-target]").forEach(trigger => {
+                trigger.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    navigateToPage(
+                        trigger.getAttribute("data-target"),
+                        trigger.getAttribute("data-nav-label")
+                    );
+                });
+            });
+        });
+
+        function bookService(serviceName) {
+            document.getElementById("serviceSelect").value = serviceName;
+            navigateToPage("contact", "Contact Us");
+        }
+
+        document.querySelectorAll(".filter-btn").forEach(btn => {
+            btn.addEventListener("click", () => {
+                document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+                const filter = btn.getAttribute("data-filter");
+
+                document.querySelectorAll(".portfolio-item").forEach(item => {
+                    item.style.display = (filter === "all" || item.getAttribute("data-category") === filter) ? "flex" : "none";
+                });
+            });
+        });
+
+        function openGuide(title, content) {
+            document.getElementById("modalTitle").textContent = title;
+            document.getElementById("modalBody").textContent = content;
+            document.getElementById("guideModal").classList.add("open");
+        }
+
+        function closeGuide() {
+            document.getElementById("guideModal").classList.remove("open");
+        }
+
+        document.getElementById("guideModal").addEventListener("click", (e) => {
+            if (e.target.id === "guideModal") closeGuide();
+        });
+
+        /* ================= WHATSAPP FORM SUBMISSION ================= */
+        document.getElementById("contactForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            // Replace with your WhatsApp number (country code + number, no '+' or spaces)
+            const myWhatsAppNumber = "923001234567";
+
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const service = document.getElementById("serviceSelect").value;
+            const message = document.getElementById("message").value.trim();
+
+            const whatsappText =
+                `*New Inquiry - To Easy Solution*%0A%0A` +
+                `*Name:* ${encodeURIComponent(name)}%0A` +
+                `*Email:* ${encodeURIComponent(email)}%0A` +
+                `*Service:* ${encodeURIComponent(service)}%0A` +
+                `*Details:* ${encodeURIComponent(message)}`;
+
+            const whatsappURL = `https://wa.me/${923008285784}?text=${whatsappText}`;
+            window.open(whatsappURL, "_blank");
+
+            document.getElementById("formResponse").textContent =
+                `Redirecting to WhatsApp to send your inquiry for ${service}...`;
+            e.target.reset();
+        });
+    </script>
+</body>
+</html>
