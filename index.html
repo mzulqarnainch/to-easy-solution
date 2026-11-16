@@ -1113,6 +1113,33 @@
                 border-radius: 16px;
             }
         }
+
+
+        /* ================= DISABLE TEXT SELECTION & IMAGE DRAGGING ================= */
+body, body * {
+    -webkit-user-select: none; /* Safari / Chrome */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* IE / Edge */
+    user-select: none;         /* Standard */
+    -webkit-touch-callout: none; /* Disable long-press menu on mobile */
+}
+
+/* Re-enable typing and selection inside Contact Us form fields */
+input, textarea, select {
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+    -ms-user-select: text !important;
+    user-select: text !important;
+}
+
+/* Prevent dragging images or logo.png */
+img {
+    -webkit-user-drag: none;
+    user-drag: none;
+    pointer-events: none;
+}
+
+        
     </style>
 </head>
 <body>
@@ -2045,6 +2072,37 @@ document.querySelectorAll(".enroll-whatsapp-btn").forEach(button => {
         window.open(whatsappURL, "_blank", "noopener,noreferrer");
     });
 });
+
+        /* ================= CONTENT PROTECTION (BLOCK COPY, RIGHT-CLICK & SHORTCUTS) ================= */
+// 1. Block right-click menu (except inside form inputs)
+document.addEventListener("contextmenu", function (e) {
+    if (!e.target.matches("input, textarea")) {
+        e.preventDefault();
+    }
+});
+
+// 2. Block Copy & Cut actions outside form inputs
+["copy", "cut"].forEach(event => {
+    document.addEventListener(event, function (e) {
+        if (!e.target.matches("input, textarea")) {
+            e.preventDefault();
+        }
+    });
+});
+
+// 3. Block Ctrl/Cmd + C, A, U, S, X shortcuts outside form inputs
+document.addEventListener("keydown", function (e) {
+    const isInput = e.target.matches("input, textarea");
+    if ((e.ctrlKey || e.metaKey) && !isInput) {
+        const blockedKeys = ["c", "a", "u", "s", "x"];
+        if (blockedKeys.includes(e.key.toLowerCase())) {
+            e.preventDefault();
+        }
+    }
+});
+
+
+        
     </script>
 </body>
 </html>
