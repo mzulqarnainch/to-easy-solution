@@ -9,6 +9,179 @@
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+        /* ================= FLOATING BACKGROUND SHAPES & ICONS ================= */
+.bg-floating-layer {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Keep main sections above the floating layer */
+.navbar, .page-container, footer {
+    position: relative;
+    z-index: 1;
+}
+
+/* Subtle organic curved wave blobs on the right side */
+.bg-wave-shape {
+    position: absolute;
+    right: -8%;
+    top: -10%;
+    width: 55vw;
+    height: 120vh;
+    background: rgba(235, 226, 213, 0.45);
+    border-radius: 48% 52% 62% 38% / 45% 55% 45% 55%;
+    animation: morphWave 18s ease-in-out infinite alternate;
+}
+
+.bg-wave-shape-2 {
+    position: absolute;
+    right: -12%;
+    top: -5%;
+    width: 42vw;
+    height: 95vh;
+    background: rgba(226, 215, 200, 0.35);
+    border-radius: 60% 40% 35% 65% / 55% 45% 55% 45%;
+    animation: morphWave 22s ease-in-out infinite alternate-reverse;
+}
+
+.float-item {
+    position: absolute;
+    opacity: 0.78;
+}
+
+/* 1. Spinning Pink Gear */
+.shape-gear {
+    top: 16%;
+    left: 14%;
+    font-size: 2.3rem;
+    color: #FF8DA1;
+    animation: spinGear 14s linear infinite, gentleBob 5s ease-in-out infinite;
+}
+
+/* 2. Hollow Pink Ring */
+.shape-ring {
+    top: 12%;
+    left: 44%;
+    width: 24px;
+    height: 24px;
+    border: 4px solid #FF5A79;
+    border-radius: 50%;
+    animation: floatDrift 7s ease-in-out infinite;
+}
+
+/* 3. Purple Thumbs-Up */
+.shape-thumb {
+    top: 26%;
+    left: 57%;
+    font-size: 1.75rem;
+    color: #7C69EF;
+    animation: thumbTilt 4.5s ease-in-out infinite;
+}
+
+/* 4. Blue Analytics Bar-Chart Badge */
+.shape-chart-pill {
+    top: 29%;
+    left: 69%;
+    background: #5C9DFF;
+    padding: 7px 12px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 32px;
+    box-shadow: 0 8px 18px rgba(92, 157, 255, 0.25);
+    animation: gentleBob 6s ease-in-out infinite 1s;
+}
+
+.shape-chart-pill span {
+    width: 5px;
+    border-radius: 2px;
+    display: block;
+}
+
+.shape-chart-pill span:nth-child(1) {
+    height: 17px;
+    background: #FBBF24;
+    animation: barGrow 2.6s ease-in-out infinite;
+}
+
+.shape-chart-pill span:nth-child(2) {
+    height: 9px;
+    background: #FFFFFF;
+    animation: barGrow 2.6s ease-in-out infinite 0.4s;
+}
+
+.shape-chart-pill span:nth-child(3) {
+    height: 13px;
+    background: #FFFFFF;
+    animation: barGrow 2.6s ease-in-out infinite 0.8s;
+}
+
+/* 5. Gradient Outlined Triangle */
+.shape-triangle {
+    top: 24%;
+    right: 3%;
+    width: 28px;
+    height: 28px;
+    animation: spinGear 20s linear infinite reverse, gentleBob 6s ease-in-out infinite;
+}
+
+/* 6. Lower Page Subtle Accents (for when scrolling down) */
+.shape-gear-bottom {
+    bottom: 18%;
+    right: 12%;
+    font-size: 2rem;
+    color: #C86D3B;
+    opacity: 0.35;
+    animation: spinGear 18s linear infinite reverse;
+}
+
+.shape-ring-bottom {
+    bottom: 28%;
+    left: 8%;
+    width: 20px;
+    height: 20px;
+    border: 3.5px solid #D97706;
+    border-radius: 50%;
+    opacity: 0.4;
+    animation: floatDrift 8s ease-in-out infinite;
+}
+
+/* ================= KEYFRAME ANIMATIONS ================= */
+@keyframes spinGear {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes gentleBob {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-14px); }
+}
+
+@keyframes floatDrift {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(12px, -16px) scale(1.08); }
+}
+
+@keyframes thumbTilt {
+    0%, 100% { transform: translateY(0) rotate(-6deg); }
+    50% { transform: translateY(-12px) rotate(8deg); }
+}
+
+@keyframes barGrow {
+    0%, 100% { transform: scaleY(1); }
+    50% { transform: scaleY(0.65); }
+}
+
+@keyframes morphWave {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(-25px, 20px) rotate(4deg); }
+}
         /* ================= WARM CREAM PALETTE & RESET ================= */
         :root {
             --bg-cream: #FAF6F0;
@@ -943,6 +1116,49 @@
     </style>
 </head>
 <body>
+
+    <!-- FLOATING ANIMATED BACKGROUND LAYER -->
+<div class="bg-floating-layer" aria-hidden="true">
+    <div class="bg-wave-shape"></div>
+    <div class="bg-wave-shape-2"></div>
+
+    <!-- Spinning Pink Gear -->
+    <div class="float-item shape-gear">
+        <i class="fas fa-gear"></i>
+    </div>
+
+    <!-- Hollow Pink Ring -->
+    <div class="float-item shape-ring"></div>
+
+    <!-- Floating Purple Thumbs Up -->
+    <div class="float-item shape-thumb">
+        <i class="fas fa-thumbs-up"></i>
+    </div>
+
+    <!-- Blue Analytics Pill with Animated Bars -->
+    <div class="float-item shape-chart-pill">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- Gradient Outlined Triangle -->
+    <svg class="float-item shape-triangle" viewBox="0 0 36 36" fill="none">
+        <defs>
+            <linearGradient id="triGrad" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#F59E0B"/>
+                <stop offset="100%" stop-color="#EC4899"/>
+            </linearGradient>
+        </defs>
+        <polygon points="18,4 33,31 3,31" stroke="url(#triGrad)" stroke-width="3" fill="none"/>
+    </svg>
+
+    <!-- Subtle Lower-Page Accents -->
+    <div class="float-item shape-gear-bottom">
+        <i class="fas fa-gear"></i>
+    </div>
+    <div class="float-item shape-ring-bottom"></div>
+</div>
 
     <!-- FULLSCREEN BLANK CREAM PRELOADER WITH CLOCKWISE & ANTI-CLOCKWISE CIRCLES -->
     <div id="preloader">
