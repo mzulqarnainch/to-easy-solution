@@ -1296,10 +1296,223 @@ img {
 .jelly-bounce-pick {
     animation: jellySquish 0.5s cubic-bezier(0.28, 0.84, 0.42, 1);
 }
-    
+    /* ================= EXTRA SMALL FLOATING BACKGROUND PARTICLES & MICRO-ICONS ================= */
+.micro-float {
+    position: absolute;
+    pointer-events: none;
+    will-change: transform, opacity;
+}
+
+/* Soft Glowing Terracotta & Gold Dots */
+.dot-particle {
+    border-radius: 50%;
+    animation: microDriftUp 14s ease-in-out infinite;
+}
+
+.dot-1 {
+    width: 8px;
+    height: 8px;
+    background: #C86D3B;
+    top: 38%;
+    left: 8%;
+    opacity: 0.45;
+    animation-duration: 11s;
+}
+
+.dot-2 {
+    width: 11px;
+    height: 11px;
+    background: #F59E0B;
+    top: 62%;
+    left: 22%;
+    opacity: 0.35;
+    animation-duration: 15s;
+    animation-delay: 2s;
+}
+
+.dot-3 {
+    width: 7px;
+    height: 7px;
+    background: #EC4899;
+    top: 19%;
+    left: 78%;
+    opacity: 0.4;
+    animation-duration: 12s;
+    animation-delay: 1s;
+}
+
+.dot-4 {
+    width: 10px;
+    height: 10px;
+    background: #7C69EF;
+    top: 74%;
+    right: 18%;
+    opacity: 0.35;
+    animation-duration: 16s;
+    animation-delay: 3s;
+}
+
+.dot-5 {
+    width: 6px;
+    height: 6px;
+    background: #10B981;
+    top: 48%;
+    right: 6%;
+    opacity: 0.45;
+    animation-duration: 10s;
+    animation-delay: 0.5s;
+}
+
+/* Mini Floating Agency Icons */
+.micro-icon {
+    font-size: 1.05rem;
+    opacity: 0.38;
+    animation: microFloatSway 9s ease-in-out infinite;
+}
+
+/* Paper Plane (Email Marketing) */
+.icon-plane {
+    top: 44%;
+    left: 11%;
+    color: #C86D3B;
+    animation: planeGlide 13s ease-in-out infinite;
+}
+
+/* Bullseye Target (Lead Generation) */
+.icon-target {
+    top: 15%;
+    right: 22%;
+    color: #EF4444;
+    font-size: 1.15rem;
+    animation: microFloatSway 10s ease-in-out infinite 1.5s;
+}
+
+/* Sparkle / Star (Growth) */
+.icon-spark-1 {
+    top: 68%;
+    left: 6%;
+    color: #F59E0B;
+    font-size: 0.95rem;
+    animation: twinkleFloat 6s ease-in-out infinite;
+}
+
+.icon-spark-2 {
+    top: 34%;
+    right: 14%;
+    color: #C86D3B;
+    font-size: 0.9rem;
+    animation: twinkleFloat 7s ease-in-out infinite 2s;
+}
+
+/* Tiny Plus Sign & Hollow Square */
+.micro-plus {
+    top: 55%;
+    left: 33%;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #5C9DFF;
+    opacity: 0.42;
+    animation: spinSlowMicro 16s linear infinite, microFloatSway 8s ease-in-out infinite;
+}
+
+.micro-square {
+    top: 80%;
+    left: 48%;
+    width: 12px;
+    height: 12px;
+    border: 2.5px solid #C86D3B;
+    border-radius: 3px;
+    opacity: 0.35;
+    animation: spinSlowMicro 18s linear infinite reverse, microDriftUp 12s ease-in-out infinite;
+}
+
+.micro-ring-mini {
+    top: 22%;
+    left: 31%;
+    width: 12px;
+    height: 12px;
+    border: 2.5px solid #10B981;
+    border-radius: 50%;
+    opacity: 0.42;
+    animation: microDriftUp 11s ease-in-out infinite 1s;
+}
+
+/* Keyframes for Small Floating Elements */
+@keyframes microDriftUp {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+    }
+    33% {
+        transform: translate(14px, -22px) scale(1.15);
+    }
+    66% {
+        transform: translate(-10px, -38px) scale(0.95);
+    }
+}
+
+@keyframes microFloatSway {
+    0%, 100% {
+        transform: translate(0, 0) rotate(-5deg);
+    }
+    50% {
+        transform: translate(12px, -18px) rotate(8deg);
+    }
+}
+
+@keyframes planeGlide {
+    0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    50% {
+        transform: translate(26px, -20px) rotate(10deg);
+    }
+}
+
+@keyframes twinkleFloat {
+    0%, 100% {
+        transform: scale(0.85) translateY(0);
+        opacity: 0.25;
+    }
+    50% {
+        transform: scale(1.25) translateY(-12px);
+        opacity: 0.65;
+    }
+}
+
+@keyframes spinSlowMicro {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+        
     </style>
 </head>
 <body>
+
+    <!-- EXTRA SMALL FLOATING PARTICLES & MICRO-ICONS -->
+    <span class="micro-float dot-particle dot-1"></span>
+    <span class="micro-float dot-particle dot-2"></span>
+    <span class="micro-float dot-particle dot-3"></span>
+    <span class="micro-float dot-particle dot-4"></span>
+    <span class="micro-float dot-particle dot-5"></span>
+
+    <span class="micro-float micro-ring-mini"></span>
+    <span class="micro-float micro-square"></span>
+    <span class="micro-float micro-plus">+</span>
+
+    <div class="micro-float micro-icon icon-plane">
+        <i class="fas fa-paper-plane"></i>
+    </div>
+    <div class="micro-float micro-icon icon-target">
+        <i class="fas fa-bullseye"></i>
+    </div>
+    <div class="micro-float micro-icon icon-spark-1">
+        <i class="fas fa-sparkles"></i>
+    </div>
+    <div class="micro-float micro-icon icon-spark-2">
+        <i class="fas fa-star"></i>
+    </div>
+    
 
     <!-- FLOATING ANIMATED BACKGROUND LAYER -->
 <div class="bg-floating-layer" aria-hidden="true">
