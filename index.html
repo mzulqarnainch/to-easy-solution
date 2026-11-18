@@ -1138,8 +1138,165 @@ img {
     user-drag: none;
     pointer-events: none;
 }
+    /* ================= CUSTOM JELLY SERVICE DROPDOWN ================= */
+.jelly-select-wrapper {
+    position: relative;
+    width: 100%;
+    font-family: inherit;
+}
 
-        
+.jelly-select-trigger {
+    width: 100%;
+    padding: 0.88rem 1.1rem;
+    background: #FAF6F0;
+    border: 1.5px solid rgba(28, 25, 23, 0.14);
+    border-radius: 14px;
+    color: #1C1917;
+    font-size: 0.96rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.jelly-select-trigger:hover {
+    border-color: var(--accent-terracotta, #C86D3B);
+    background: #FFFFFF;
+}
+
+.jelly-select-wrapper.open .jelly-select-trigger {
+    border-color: var(--accent-terracotta, #C86D3B);
+    background: #FFFFFF;
+    box-shadow: 0 0 0 4px rgba(200, 109, 59, 0.15);
+    animation: jellySquish 0.55s cubic-bezier(0.28, 0.84, 0.42, 1);
+}
+
+.jelly-select-trigger .trigger-left {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+}
+
+.jelly-select-trigger .trigger-icon {
+    color: var(--accent-terracotta, #C86D3B);
+    font-size: 1rem;
+}
+
+.jelly-select-trigger .chevron-icon {
+    color: #78716C;
+    font-size: 0.85rem;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.jelly-select-wrapper.open .chevron-icon {
+    transform: rotate(180deg);
+    color: var(--accent-terracotta, #C86D3B);
+}
+
+/* Floating Jelly Options Panel */
+.jelly-options-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background: #FFFFFF;
+    border: 1.5px solid rgba(200, 109, 59, 0.28);
+    border-radius: 16px;
+    box-shadow: 0 18px 40px rgba(28, 25, 23, 0.14);
+    padding: 0.45rem;
+    max-height: 270px;
+    overflow-y: auto;
+    z-index: 99;
+    display: none;
+    transform-origin: top center;
+}
+
+.jelly-select-wrapper.open .jelly-options-menu {
+    display: block;
+    animation: jellyDropOpen 0.52s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Custom warm scrollbar inside dropdown */
+.jelly-options-menu::-webkit-scrollbar {
+    width: 6px;
+}
+.jelly-options-menu::-webkit-scrollbar-thumb {
+    background: rgba(200, 109, 59, 0.35);
+    border-radius: 10px;
+}
+
+.jelly-option {
+    padding: 0.72rem 0.95rem;
+    border-radius: 10px;
+    color: #1C1917;
+    font-size: 0.93rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.jelly-option:hover {
+    background: #FAF6F0;
+    color: var(--accent-terracotta, #C86D3B);
+    transform: translateX(5px) scale(1.01);
+}
+
+.jelly-option.selected {
+    background: rgba(200, 109, 59, 0.12);
+    color: var(--accent-terracotta, #C86D3B);
+    font-weight: 700;
+}
+
+.jelly-option .check-mark {
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.jelly-option.selected .check-mark {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Elastic Jelly Keyframes */
+@keyframes jellyDropOpen {
+    0% {
+        opacity: 0;
+        transform: scale(0.88, 0.65) translateY(-10px);
+    }
+    45% {
+        opacity: 1;
+        transform: scale(1.03, 1.06) translateY(2px);
+    }
+    70% {
+        transform: scale(0.98, 0.97) translateY(-1px);
+    }
+    85% {
+        transform: scale(1.01, 1.02) translateY(0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1, 1) translateY(0);
+    }
+}
+
+@keyframes jellySquish {
+    0% { transform: scale(1, 1); }
+    30% { transform: scale(1.03, 0.93); }
+    55% { transform: scale(0.98, 1.04); }
+    75% { transform: scale(1.01, 0.99); }
+    100% { transform: scale(1, 1); }
+}
+
+.jelly-bounce-pick {
+    animation: jellySquish 0.5s cubic-bezier(0.28, 0.84, 0.42, 1);
+}
+    
     </style>
 </head>
 <body>
@@ -1892,21 +2049,67 @@ img {
                         <input type="email" id="email" required placeholder="you@company.com">
                     </div>
                     <div class="form-group">
-                        <label>Service Needed</label>
-                        <select id="serviceSelect">
-                            <option value="Lead Generation">Lead Generation</option>
-                            <option value="Business Development">Business Development</option>
-                            <option value="Sales Development">Sales Development</option>
-                            <option value="Email Marketing">Email Marketing</option>
-                            <option value="LinkedIn Page Verification">LinkedIn Page Verification</option>
-                            <option value="Email Find">Email Find</option>
-                            <option value="Data Entry">Data Entry</option>
-                            <option value="CRM Management">CRM Management</option>
-                            <option value="LinkedIn Outreach">LinkedIn Outreach</option>
-                            <option value="Social Media Marketing (Meta & Google Ads)">Social Media Marketing (Meta & Google Ads)</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
+    <label>Service Needed</label>
+    <!-- Hidden input keeps your existing WhatsApp JS working automatically -->
+    <input type="hidden" id="serviceSelect" value="Lead Generation">
+
+    <div class="jelly-select-wrapper" id="jellyServiceDropdown">
+        <div class="jelly-select-trigger" tabindex="0">
+            <span class="trigger-left">
+                <i class="fas fa-sparkles trigger-icon"></i>
+                <span id="jellySelectedText">Lead Generation</span>
+            </span>
+            <i class="fas fa-chevron-down chevron-icon"></i>
+        </div>
+
+        <div class="jelly-options-menu">
+            <div class="jelly-option selected" data-value="Lead Generation">
+                <span>Lead Generation</span>
+                <i class="fas fa-check check-mark"></i>
+            </div>
+            <div class="jelly-option" data-value="Business Development">
+                <span>Business Development</span>
+                <i class="fas fa-check check-mark"></i>
+            </div>
+            <div class="jelly-option" data-value="Sales Development">
+                <span>Sales Development</span>
+                <i class="fas fa-check check-mark"></i>
+            </div>
+            <div class="jelly-option" data-value="Email Marketing">
+                <span>Email Marketing</span>
+                <i class="fas fa-check check-mark"></i>
+            </div>
+            <div class="jelly-option" data-value="LinkedIn Page Verification">
+                <span>LinkedIn Page Verification</span>
+                <i class="fas fa-check check-mark"></i>
+            </div>
+            <div class="jelly-option" data-value="Email Find">
+                <span>Email Find</span>
+                <i class="fas fa-check check-mark"></i>
+            </div>
+            <div class="jelly-option" data-value="Data Entry">
+                <span>Data Entry</span>
+                <i class="fas fa-check check-mark"></i>
+            </div>
+            <div class="jelly-option" data-value="CRM Management">
+                <span>CRM Management</span>
+                <i class="fas fa-check check-mark"></i>
+            </div>
+            <div class="jelly-option" data-value="LinkedIn Outreach">
+                <span>LinkedIn Outreach</span>
+                <i class="fas fa-check check-mark"></i>
+            </div>
+            <div class="jelly-option" data-value="Social Media Marketing (Meta & Google Ads)">
+                <span>Social Media Marketing (Meta &amp; Google Ads)</span>
+                <i class="fas fa-check check-mark"></i>
+            </div>
+            <div class="jelly-option" data-value="Other">
+                <span>Other</span>
+                <i class="fas fa-check check-mark"></i>
+            </div>
+        </div>
+    </div>
+</div>
                     <div class="form-group">
                         <label>Project Details</label>
                         <textarea id="message" rows="4" required placeholder="Tell us about your target audience, CRM, or ad goals..."></textarea>
@@ -2100,7 +2303,48 @@ document.addEventListener("keydown", function (e) {
         }
     }
 });
+        /* ================= JELLY SERVICE DROPDOWN INTERACTION ================= */
+(function () {
+    const dropdown = document.getElementById("jellyServiceDropdown");
+    if (!dropdown) return;
 
+    const trigger = dropdown.querySelector(".jelly-select-trigger");
+    const selectedText = document.getElementById("jellySelectedText");
+    const hiddenInput = document.getElementById("serviceSelect");
+    const options = dropdown.querySelectorAll(".jelly-option");
+
+    // Toggle open/close with jelly bounce
+    trigger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        dropdown.classList.toggle("open");
+    });
+
+    // Select an option & trigger jelly squish feedback
+    options.forEach(option => {
+        option.addEventListener("click", () => {
+            const value = option.getAttribute("data-value");
+            selectedText.textContent = value;
+            hiddenInput.value = value;
+
+            options.forEach(opt => opt.classList.remove("selected"));
+            option.classList.add("selected");
+
+            dropdown.classList.remove("open");
+
+            // Trigger elastic jelly squish on selection
+            trigger.classList.remove("jelly-bounce-pick");
+            void trigger.offsetWidth; // Force reflow so animation replays every time
+            trigger.classList.add("jelly-bounce-pick");
+        });
+    });
+
+    // Close dropdown when clicking anywhere outside
+    document.addEventListener("click", (e) => {
+        if (!dropdown.contains(e.target)) {
+            dropdown.classList.remove("open");
+        }
+    });
+})();
 
         
     </script>
