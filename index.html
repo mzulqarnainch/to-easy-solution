@@ -1484,6 +1484,113 @@ img {
     100% { transform: rotate(360deg); }
 }
 
+    /* ================= LAUNCHING ROCKET PILL (MULTI-COLOR & ANIMATED) ================= */
+.rocket-scroll-top {
+    position: fixed;
+    right: 26px;
+    bottom: 28px;
+    width: 54px;
+    height: 68px;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #C86D3B, #F59E0B, #EC4899, #7C69EF);
+    background-size: 300% 300%;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 25px rgba(200, 109, 59, 0.38),
+                0 0 0 4px rgba(255, 255, 255, 0.75);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(25px) scale(0.85);
+    transition: opacity 0.35s ease,
+                visibility 0.35s ease,
+                transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.3s ease;
+    animation: rocketPillGradient 6s ease infinite;
+    z-index: 998;
+    overflow: hidden;
+}
+
+/* Visible after scrolling down */
+.rocket-scroll-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+/* Hover rumble & bright glow */
+.rocket-scroll-top:hover {
+    transform: translateY(-5px) scale(1.06);
+    box-shadow: 0 14px 30px rgba(236, 72, 153, 0.45),
+                0 0 22px rgba(245, 158, 11, 0.55),
+                0 0 0 4px #FFFFFF;
+}
+
+.rocket-scroll-top:hover .rocket-icon {
+    animation: rocketEngineShake 0.35s ease-in-out infinite;
+}
+
+/* Rocket Icon tilted straight up */
+.rocket-icon {
+    font-size: 1.45rem;
+    transform: rotate(-45deg);
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));
+    transition: transform 0.3s ease;
+    z-index: 2;
+}
+
+/* Animated Glowing Thruster Flame below rocket */
+.rocket-flame {
+    width: 10px;
+    height: 14px;
+    margin-top: 2px;
+    background: linear-gradient(to bottom, #FFFFFF, #FDE047, #F97316, transparent);
+    border-radius: 50% 50% 50% 50% / 25% 25% 75% 75%;
+    animation: flameFlicker 0.22s ease-in-out infinite alternate;
+    z-index: 1;
+}
+
+/* Liftoff blast animation when clicked */
+.rocket-scroll-top.launching {
+    animation: rocketBlastOff 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    box-shadow: 0 15px 35px rgba(245, 158, 11, 0.8),
+                0 0 30px rgba(236, 72, 153, 0.7);
+}
+
+.rocket-scroll-top.launching .rocket-flame {
+    height: 26px;
+    width: 14px;
+    background: linear-gradient(to bottom, #FFFFFF, #FEF08A, #FB923C, #EF4444, transparent);
+}
+
+/* Keyframes */
+@keyframes rocketPillGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes rocketEngineShake {
+    0%, 100% { transform: rotate(-45deg) translate(0, 0); }
+    25% { transform: rotate(-43deg) translate(-1px, 1px); }
+    75% { transform: rotate(-47deg) translate(1px, -1px); }
+}
+
+@keyframes flameFlicker {
+    0% { transform: scaleY(0.85) scaleX(0.9); opacity: 0.85; }
+    100% { transform: scaleY(1.25) scaleX(1.1); opacity: 1; }
+}
+
+@keyframes rocketBlastOff {
+    0% { transform: translateY(0) scale(1); }
+    25% { transform: translateY(8px) scale(0.94, 1.06); }
+    100% { transform: translateY(-90px) scale(0.8); opacity: 0; }
+}
+
         
     </style>
 </head>
@@ -2371,7 +2478,13 @@ img {
 
     <p>&copy; 2026 To Easy Solution. All Rights Reserved. | Lead Generation • Outreach • CRM • Meta & Google Ads</p>
 </footer>
-
+    
+<!-- LAUNCHING ROCKET SCROLL-TO-TOP PILL -->
+<button id="rocketTopBtn" class="rocket-scroll-top" aria-label="Scroll to top" title="Back to Top">
+    <i class="fas fa-rocket rocket-icon"></i>
+    <span class="rocket-flame"></span>
+</button>
+    
     <script>
         const preloader = document.getElementById("preloader");
         const loaderText = document.getElementById("loader-text");
@@ -2559,6 +2672,32 @@ document.addEventListener("keydown", function (e) {
     });
 })();
 
+        /* ================= LAUNCHING ROCKET PILL SCROLL BEHAVIOR ================= */
+(function () {
+    const rocketBtn = document.getElementById("rocketTopBtn");
+    if (!rocketBtn) return;
+
+    // Show rocket pill after scrolling down 260px
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 260) {
+            rocketBtn.classList.add("show");
+        } else if (!rocketBtn.classList.contains("launching")) {
+            rocketBtn.classList.remove("show");
+        }
+    });
+
+    // Ignite thruster, blast upward, and smoothly scroll to top on click
+    rocketBtn.addEventListener("click", () => {
+        rocketBtn.classList.add("launching");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+
+        setTimeout(() => {
+            rocketBtn.classList.remove("launching", "show");
+        }, 750);
+    });
+})();
+
+        
         
     </script>
 </body>
