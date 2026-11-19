@@ -182,6 +182,91 @@
     0% { transform: translate(0, 0) rotate(0deg); }
     100% { transform: translate(-25px, 20px) rotate(4deg); }
 }
+
+
+
+        /* ================= INFINITE COUNTRIES & FLAGS MARQUEE ================= */
+.countries-marquee-section {
+    width: 100%;
+    padding: 1.8rem 0;
+    margin: 2rem 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.countries-marquee-label {
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-terracotta, #C86D3B);
+    margin-bottom: 1rem;
+}
+
+/* Soft fade edges on left and right to blend into #FAF6F0 cream background */
+.marquee-viewport {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+}
+
+.marquee-track {
+    display: flex;
+    width: max-content;
+    gap: 1.1rem;
+    animation: scrollCountriesLine 28s linear infinite;
+}
+
+/* Pause smoothly when user hovers over the bar */
+.marquee-viewport:hover .marquee-track {
+    animation-play-state: paused;
+}
+
+.country-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    background: #FFFFFF;
+    border: 1.5px solid rgba(28, 25, 23, 0.08);
+    padding: 0.65rem 1.35rem;
+    border-radius: 50px;
+    box-shadow: 0 6px 18px rgba(28, 25, 23, 0.05);
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #1C1917;
+    white-space: nowrap;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+                border-color 0.25s ease;
+}
+
+.country-pill:hover {
+    transform: translateY(-3px) scale(1.03);
+    border-color: var(--accent-terracotta, #C86D3B);
+}
+
+.country-pill img {
+    width: 24px;
+    height: 17px;
+    object-fit: cover;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    flex-shrink: 0;
+}
+
+@keyframes scrollCountriesLine {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+
+        
         /* ================= WARM CREAM PALETTE & RESET ================= */
         :root {
             --bg-cream: #FAF6F0;
@@ -1767,6 +1852,41 @@ img {
                     <p>Global Businesses Scaled</p>
                 </div>
             </div>
+
+            <!-- CONTINUOUS RUNNING COUNTRIES & FLAGS BAR -->
+<div class="countries-marquee-section">
+    <p class="countries-marquee-label">Serving Clients &amp; Generating Leads Globally</p>
+
+    <div class="marquee-viewport">
+        <div class="marquee-track">
+            <!-- Set 1 -->
+            <div class="country-pill"><img src="https://flagcdn.com/w40/us.png" alt="United States Flag" loading="lazy"> United States</div>
+            <div class="country-pill"><img src="https://flagcdn.com/w40/gb.png" alt="United Kingdom Flag" loading="lazy"> United Kingdom</div>
+            <div class="country-pill"><img src="https://flagcdn.com/w40/ca.png" alt="Canada Flag" loading="lazy"> Canada</div>
+            <div class="country-pill"><img src="https://flagcdn.com/w40/sa.png" alt="Saudi Arabia Flag" loading="lazy"> Saudi Arabia</div>
+            <div class="country-pill"><img src="https://flagcdn.com/w40/fr.png" alt="France Flag" loading="lazy"> France</div>
+            <div class="country-pill"><img src="https://flagcdn.com/w40/de.png" alt="Germany Flag" loading="lazy"> Germany</div>
+            <div class="country-pill"><img src="https://flagcdn.com/w40/au.png" alt="Australia Flag" loading="lazy"> Australia</div>
+            <div class="country-pill"><img src="https://flagcdn.com/w40/ae.png" alt="UAE Flag" loading="lazy"> UAE</div>
+            <div class="country-pill"><img src="https://flagcdn.com/w40/eg.png" alt="Egypt Flag" loading="lazy"> Egypt</div>
+            <div class="country-pill"><img src="https://flagcdn.com/w40/om.png" alt="Oman Flag" loading="lazy"> Oman</div>
+
+            <!-- Set 2 (Duplicate for seamless infinite loop without gaps) -->
+            <div class="country-pill" aria-hidden="true"><img src="https://flagcdn.com/w40/us.png" alt="" loading="lazy"> United States</div>
+            <div class="country-pill" aria-hidden="true"><img src="https://flagcdn.com/w40/gb.png" alt="" loading="lazy"> United Kingdom</div>
+            <div class="country-pill" aria-hidden="true"><img src="https://flagcdn.com/w40/ca.png" alt="" loading="lazy"> Canada</div>
+            <div class="country-pill" aria-hidden="true"><img src="https://flagcdn.com/w40/sa.png" alt="" loading="lazy"> Saudi Arabia</div>
+            <div class="country-pill" aria-hidden="true"><img src="https://flagcdn.com/w40/fr.png" alt="" loading="lazy"> France</div>
+            <div class="country-pill" aria-hidden="true"><img src="https://flagcdn.com/w40/de.png" alt="" loading="lazy"> Germany</div>
+            <div class="country-pill"><img src="https://flagcdn.com/w40/au.png" alt="Australia Flag" loading="lazy"> Australia</div>
+            <div class="country-pill" aria-hidden="true"><img src="https://flagcdn.com/w40/ae.png" alt="" loading="lazy"> UAE</div>
+            <div class="country-pill" aria-hidden="true"><img src="https://flagcdn.com/w40/eg.png" alt="" loading="lazy"> Egypt</div>
+            <div class="country-pill" aria-hidden="true"><img src="https://flagcdn.com/w40/om.png" alt="" loading="lazy"> Oman</div>
+        </div>
+    </div>
+</div>
+
+            
 
             <!-- C. CORE CAPABILITIES PREVIEW -->
             <div class="home-block">
