@@ -990,45 +990,155 @@
     transform: translateY(-2px);
 }
 
-        /* ================= PORTFOLIO FILTER TABS ================= */
-        .filter-bar {
-            display: flex;
-            justify-content: center;
-            gap: 0.8rem;
-            margin-bottom: 2.5rem;
-            flex-wrap: wrap;
-        }
+        /* ================= PORTFOLIO FILTER TABS & CASE STUDY ENHANCEMENTS ================= */
+.portfolio-filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+}
 
-        .filter-btn {
-            background: #FFFFFF;
-            border: 1px solid var(--border-sand);
-            color: var(--text-muted);
-            padding: 9px 20px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.88rem;
-            transition: all 0.25s ease;
-        }
+.filter-pill-btn {
+    padding: 0.6rem 1.35rem;
+    border-radius: 50px;
+    border: 1.5px solid rgba(28, 25, 23, 0.12);
+    background: #FFFFFF;
+    color: #1C1917;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
 
-        .filter-btn.active, .filter-btn:hover {
-            background: var(--accent-terracotta);
-            border-color: var(--accent-terracotta);
-            color: #FFFFFF;
-        }
+.filter-pill-btn:hover {
+    border-color: var(--accent-terracotta, #C86D3B);
+    color: var(--accent-terracotta, #C86D3B);
+    transform: translateY(-2px);
+}
 
-        .metric-badge {
-            display: inline-block;
-            margin-top: 1rem;
-            padding: 6px 12px;
-            border-radius: 8px;
-            background: #ECFDF5;
-            border: 1px solid #A7F3D0;
-            color: #065F46;
-            font-weight: 700;
-            font-size: 0.85rem;
-        }
+.filter-pill-btn.active {
+    background: var(--accent-terracotta, #C86D3B);
+    border-color: var(--accent-terracotta, #C86D3B);
+    color: #FFFFFF;
+    box-shadow: 0 8px 20px rgba(200, 109, 59, 0.28);
+}
 
+.portfolio-metrics-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 1.2rem;
+    margin-bottom: 3rem;
+}
+
+.portfolio-metric-box {
+    background: #FFFFFF;
+    border: 1.5px solid rgba(28, 25, 23, 0.07);
+    border-radius: 16px;
+    padding: 1.35rem 1.2rem;
+    text-align: center;
+    box-shadow: 0 10px 26px rgba(28, 25, 23, 0.04);
+}
+
+.portfolio-metric-box h4 {
+    font-size: 1.85rem;
+    color: var(--accent-terracotta, #C86D3B);
+    margin-bottom: 0.25rem;
+}
+
+.portfolio-metric-box p {
+    font-size: 0.88rem;
+    color: #57534E;
+    font-weight: 600;
+}
+
+.case-study-card {
+    background: #FFFFFF;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1.5px solid rgba(28, 25, 23, 0.08);
+    box-shadow: 0 12px 30px rgba(28, 25, 23, 0.05);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.case-study-card.hidden-project {
+    display: none;
+}
+
+.case-study-thumb {
+    position: relative;
+    height: 215px;
+    overflow: hidden;
+}
+
+.case-study-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.case-study-card:hover .case-study-thumb img {
+    transform: scale(1.06);
+}
+
+.case-region-badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: rgba(28, 25, 23, 0.88);
+    color: #FAF6F0;
+    padding: 0.32rem 0.85rem;
+    border-radius: 50px;
+    font-size: 0.76rem;
+    font-weight: 600;
+    backdrop-filter: blur(4px);
+}
+
+.case-category-tag {
+    position: absolute;
+    bottom: 14px;
+    right: 14px;
+    background: var(--accent-terracotta, #C86D3B);
+    color: #FFFFFF;
+    padding: 0.28rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.case-study-body {
+    padding: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.case-kpi-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    background: #FAF6F0;
+    padding: 0.85rem;
+    border-radius: 12px;
+    margin: 1rem 0 1.3rem;
+}
+
+.case-kpi-item strong {
+    display: block;
+    font-size: 1.15rem;
+    color: #1C1917;
+}
+
+.case-kpi-item span {
+    font-size: 0.78rem;
+    color: #57534E;
+}
+
+
+        
         /* ================= LEARNING MODAL ================= */
         .modal-overlay {
             position: fixed;
@@ -2277,58 +2387,266 @@ img {
         </div>
     </div>
 </section> 
-        <!-- ==================== 4. PORTFOLIO PAGE ==================== -->
         <section id="page-portfolio" class="page-view">
-            <div class="section-header">
-                <h1>Proven <span class="highlight-word">Case Studies</span></h1>
-                <p>Real growth outcomes delivered for our clients across outreach, paid media, and data management.</p>
-            </div>
+    <!-- Section Header -->
+    <div class="section-header" style="text-align: center; max-width: 760px; margin: 0 auto 2.5rem;">
+        <span class="badge-pill" style="display: inline-block; padding: 0.4rem 1rem; border-radius: 50px; background: rgba(200, 109, 59, 0.12); color: var(--accent-terracotta); font-weight: 700; font-size: 0.85rem; margin-bottom: 0.8rem;">
+            PROVEN CASE STUDIES
+        </span>
+        <h2 style="font-size: 2.45rem; margin-bottom: 0.8rem;">Real Pipeline &amp; Revenue Outcomes</h2>
+        <p style="color: #57534E; font-size: 1.05rem; line-height: 1.65;">
+            Explore how To Easy Solution helps B2B startups, agencies, and enterprise teams across North America, Europe, Australia, and the Middle East scale outbound leads, paid ads, and CRM operations.
+        </p>
+    </div>
 
-            <div class="filter-bar">
-                <button class="filter-btn active" data-filter="all">All Projects</button>
-                <button class="filter-btn" data-filter="outreach">Lead Gen & Outreach</button>
-                <button class="filter-btn" data-filter="ads">Meta & Google Ads</button>
-                <button class="filter-btn" data-filter="crm">CRM & Data Entry</button>
-            </div>
+    <!-- Portfolio Impact Metrics Strip -->
+    <div class="portfolio-metrics-strip">
+        <div class="portfolio-metric-box">
+            <h4>$4.2M+</h4>
+            <p>Client Pipeline Generated</p>
+        </div>
+        <div class="portfolio-metric-box">
+            <h4>1,450+</h4>
+            <p>Qualified B2B Meetings Booked</p>
+        </div>
+        <div class="portfolio-metric-box">
+            <h4>4.1x</h4>
+            <p>Average Meta &amp; Google Ads ROAS</p>
+        </div>
+        <div class="portfolio-metric-box">
+            <h4>99.4%</h4>
+            <p>Verified Email &amp; CRM Accuracy</p>
+        </div>
+    </div>
 
-            <div class="grid-cards">
-                <div class="cream-card portfolio-item" data-category="outreach">
-                    <div class="card-img-wrapper">
-                        <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80" alt="FinTech SaaS Pipeline">
+    <!-- Interactive Filter Buttons -->
+    <div class="portfolio-filters" id="portfolioFilters">
+        <button type="button" class="filter-pill-btn active" data-filter="all">All Projects (6)</button>
+        <button type="button" class="filter-pill-btn" data-filter="lead-gen">Lead Generation</button>
+        <button type="button" class="filter-pill-btn" data-filter="outreach">LinkedIn &amp; Email Outreach</button>
+        <button type="button" class="filter-pill-btn" data-filter="ads">Meta &amp; Google Ads</button>
+        <button type="button" class="filter-pill-btn" data-filter="crm">CRM &amp; Data Entry</button>
+    </div>
+
+    <!-- Case Studies Grid -->
+    <div class="grid-cards" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.9rem;">
+
+        <!-- Case Study 1: US SaaS Lead Generation -->
+        <div class="cream-card case-study-card" data-category="lead-gen">
+            <div class="case-study-thumb">
+                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=600&q=75" alt="B2B SaaS Lead Generation Campaign" loading="lazy">
+                <span class="case-region-badge">United States • FinTech SaaS</span>
+                <span class="case-category-tag">Lead Generation</span>
+            </div>
+            <div class="case-study-body">
+                <h3 style="font-size: 1.25rem; margin-bottom: 0.55rem;">12,500+ Verified Decision-Maker Leads for US FinTech</h3>
+                <p style="color: #57534E; font-size: 0.92rem; line-height: 1.6; flex-grow: 1;">
+                    Built a hyper-targeted prospect database of VP Finance and CFO contacts across North America using multi-source enrichment and zero-bounce email verification.
+                </p>
+                <div class="case-kpi-row">
+                    <div class="case-kpi-item">
+                        <strong>12,500+</strong>
+                        <span>Verified Contacts</span>
                     </div>
-                    <div class="card-body">
-                        <div class="role-tag">LinkedIn & Email Outreach</div>
-                        <h3>FinTech B2B SaaS Pipeline</h3>
-                        <p>Curated 12,000 verified C-level prospects and executed personalized LinkedIn and email sequences.</p>
-                        <span class="metric-badge">+145 Qualified Demos in 90 Days</span>
+                    <div class="case-kpi-item">
+                        <strong>&lt; 0.6%</strong>
+                        <span>Bounce Rate</span>
                     </div>
                 </div>
-
-                <div class="cream-card portfolio-item" data-category="ads">
-                    <div class="card-img-wrapper">
-                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80" alt="Real Estate Lead Funnel">
-                    </div>
-                    <div class="card-body">
-                        <div class="role-tag">Meta Ads & Google Ads</div>
-                        <h3>Real Estate Buyer Acquisition</h3>
-                        <p>Combined high-intent Google Search campaigns with dynamic Instagram and Facebook retargeting.</p>
-                        <span class="metric-badge">-48% Cost Per Lead | 4.2x ROAS</span>
-                    </div>
-                </div>
-
-                <div class="cream-card portfolio-item" data-category="crm">
-                    <div class="card-img-wrapper">
-                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" alt="HubSpot CRM Migration">
-                    </div>
-                    <div class="card-body">
-                        <div class="role-tag">CRM Management & Data Entry</div>
-                        <h3>Enterprise HubSpot Cleanup</h3>
-                        <p>Deduplicated, enriched, and migrated 50,000+ legacy contacts into automated sales pipelines.</p>
-                        <span class="metric-badge">50,000+ Records (99.9% Accuracy)</span>
-                    </div>
-                </div>
+                <button type="button" class="btn-primary quote-service-btn" data-prefill-service="Lead Generation" style="width: 100%; justify-content: center; cursor: pointer;">
+                    Request Similar Results <i class="fas fa-arrow-right" style="margin-left: 6px;"></i>
+                </button>
             </div>
-        </section>
+        </div>
+
+        <!-- Case Study 2: UK LinkedIn Outreach & Appointment Setting -->
+        <div class="cream-card case-study-card" data-category="outreach">
+            <div class="case-study-thumb">
+                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=600&q=75" alt="LinkedIn Outreach & Sales Development" loading="lazy">
+                <span class="case-region-badge">United Kingdom • IT Consulting</span>
+                <span class="case-category-tag">LinkedIn Outreach</span>
+            </div>
+            <div class="case-study-body">
+                <h3 style="font-size: 1.25rem; margin-bottom: 0.55rem;">68 Qualified Discovery Calls Booked in 60 Days</h3>
+                <p style="color: #57534E; font-size: 0.92rem; line-height: 1.6; flex-grow: 1;">
+                    Revamped founder LinkedIn positioning and launched personalized conversational outreach sequences targeting UK &amp; German enterprise CTOs.
+                </p>
+                <div class="case-kpi-row">
+                    <div class="case-kpi-item">
+                        <strong>41.8%</strong>
+                        <span>Connection Accept Rate</span>
+                    </div>
+                    <div class="case-kpi-item">
+                        <strong>68 Calls</strong>
+                        <span>Booked on Calendar</span>
+                    </div>
+                </div>
+                <button type="button" class="btn-primary quote-service-btn" data-prefill-service="LinkedIn Outreach" style="width: 100%; justify-content: center; cursor: pointer;">
+                    Request Similar Results <i class="fas fa-arrow-right" style="margin-left: 6px;"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Case Study 3: UAE & Saudi Arabia Meta & Google Ads -->
+        <div class="cream-card case-study-card" data-category="ads">
+            <div class="case-study-thumb">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=75" alt="Meta and Google Ads Performance" loading="lazy">
+                <span class="case-region-badge">UAE &amp; Saudi Arabia • Real Estate</span>
+                <span class="case-category-tag">Meta &amp; Google Ads</span>
+            </div>
+            <div class="case-study-body">
+                <h3 style="font-size: 1.25rem; margin-bottom: 0.55rem;">4.6x ROAS Scaling Luxury Property Leads in Dubai &amp; Riyadh</h3>
+                <p style="color: #57534E; font-size: 0.92rem; line-height: 1.6; flex-grow: 1;">
+                    Restructured bilingual Meta Lead Ads and high-intent Google Search campaigns with instant WhatsApp lead routing and conversion tracking.
+                </p>
+                <div class="case-kpi-row">
+                    <div class="case-kpi-item">
+                        <strong>4.6x</strong>
+                        <span>Return on Ad Spend</span>
+                    </div>
+                    <div class="case-kpi-item">
+                        <strong>-44%</strong>
+                        <span>Cost Per Qualified Lead</span>
+                    </div>
+                </div>
+                <button type="button" class="btn-primary quote-service-btn" data-prefill-service="Social Media Marketing (Meta & Google Ads)" style="width: 100%; justify-content: center; cursor: pointer;">
+                    Request Similar Results <i class="fas fa-arrow-right" style="margin-left: 6px;"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Case Study 4: Canada & Australia Cold Email Marketing -->
+        <div class="cream-card case-study-card" data-category="outreach">
+            <div class="case-study-thumb">
+                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=75" alt="Cold Email Marketing Infrastructure" loading="lazy">
+                <span class="case-region-badge">Canada &amp; Australia • Logistics</span>
+                <span class="case-category-tag">Email Marketing</span>
+            </div>
+            <div class="case-study-body">
+                <h3 style="font-size: 1.25rem; margin-bottom: 0.55rem;">Multi-Domain Outbound Engine Generating 19% Reply Rate</h3>
+                <p style="color: #57534E; font-size: 0.92rem; line-height: 1.6; flex-grow: 1;">
+                    Configured secondary sending domains with full SPF/DKIM/DMARC authentication, warm-up schedules, and 4-step pain-point email sequences.
+                </p>
+                <div class="case-kpi-row">
+                    <div class="case-kpi-item">
+                        <strong>98.2%</strong>
+                        <span>Primary Inbox Placement</span>
+                    </div>
+                    <div class="case-kpi-item">
+                        <strong>$340K</strong>
+                        <span>Closed Contract Value</span>
+                    </div>
+                </div>
+                <button type="button" class="btn-primary quote-service-btn" data-prefill-service="Email Marketing" style="width: 100%; justify-content: center; cursor: pointer;">
+                    Request Similar Results <i class="fas fa-arrow-right" style="margin-left: 6px;"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Case Study 5: Germany & France CRM Management & Data Cleanup -->
+        <div class="cream-card case-study-card" data-category="crm">
+            <div class="case-study-thumb">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=600&q=75" alt="CRM Management and Data Entry" loading="lazy">
+                <span class="case-region-badge">Germany &amp; France • E-Commerce</span>
+                <span class="case-category-tag">CRM Management</span>
+            </div>
+            <div class="case-study-body">
+                <h3 style="font-size: 1.25rem; margin-bottom: 0.55rem;">45,000+ HubSpot Records Cleaned, Enriched &amp; Automated</h3>
+                <p style="color: #57534E; font-size: 0.92rem; line-height: 1.6; flex-grow: 1;">
+                    Eliminated duplicate accounts, standardized missing company fields, and built automated deal-stage pipelines for a 35-rep European sales team.
+                </p>
+                <div class="case-kpi-row">
+                    <div class="case-kpi-item">
+                        <strong>45,000+</strong>
+                        <span>Records Standardized</span>
+                    </div>
+                    <div class="case-kpi-item">
+                        <strong>14 Hrs/Wk</strong>
+                        <span>Saved Per Sales Rep</span>
+                    </div>
+                </div>
+                <button type="button" class="btn-primary quote-service-btn" data-prefill-service="CRM Management" style="width: 100%; justify-content: center; cursor: pointer;">
+                    Request Similar Results <i class="fas fa-arrow-right" style="margin-left: 6px;"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Case Study 6: Egypt & Oman Business & Sales Development -->
+        <div class="cream-card case-study-card" data-category="lead-gen">
+            <div class="case-study-thumb">
+                <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=600&q=75" alt="Business Development & LinkedIn Page Verification" loading="lazy">
+                <span class="case-region-badge">Egypt &amp; Oman • B2B Healthcare</span>
+                <span class="case-category-tag">Business Development</span>
+            </div>
+            <div class="case-study-body">
+                <h3 style="font-size: 1.25rem; margin-bottom: 0.55rem;">Regional Market Expansion &amp; Corporate LinkedIn Verification</h3>
+                <p style="color: #57534E; font-size: 0.92rem; line-height: 1.6; flex-grow: 1;">
+                    Completed official LinkedIn Company Page verification, mapped hospital procurement directors across Cairo &amp; Muscat, and secured 24 distributor demos.
+                </p>
+                <div class="case-kpi-row">
+                    <div class="case-kpi-item">
+                        <strong>24 Demos</strong>
+                        <span>Enterprise Distributors</span>
+                    </div>
+                    <div class="case-kpi-item">
+                        <strong>100%</strong>
+                        <span>Verified Brand Presence</span>
+                    </div>
+                </div>
+                <button type="button" class="btn-primary quote-service-btn" data-prefill-service="Business Development" style="width: 100%; justify-content: center; cursor: pointer;">
+                    Request Similar Results <i class="fas fa-arrow-right" style="margin-left: 6px;"></i>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bottom CTA Banner inside Portfolio -->
+    <div class="cta-banner" style="margin-top: 3.5rem; background: #1C1917; color: #FAF6F0; padding: 2.6rem 2rem; border-radius: 22px; text-align: center;">
+        <h3 style="font-size: 1.85rem; margin-bottom: 0.6rem; color: #FAF6F0;">Want Results Like These for Your Business?</h3>
+        <p style="color: rgba(250, 246, 240, 0.78); max-width: 600px; margin: 0 auto 1.5rem; font-size: 1rem;">
+            Tell us your target country and ideal customer profile—we will build a custom growth roadmap for you.
+        </p>
+        <button type="button" class="btn-primary" data-target="contact" data-nav-label="Contact Us" style="cursor: pointer;">
+            Start Your Custom Campaign <i class="fas fa-paper-plane" style="margin-left: 6px;"></i>
+        </button>
+    </div>
+
+    <!-- CONTINUOUS RUNNING COUNTRIES & FLAGS BAR (PORTFOLIO PAGE END) -->
+    <div class="countries-marquee-section" style="margin-top: 3.5rem; margin-bottom: 1rem;">
+        <p class="countries-marquee-label">Markets &amp; Regions Where We Delivered Case Studies</p>
+
+        <div class="marquee-viewport">
+            <div class="marquee-track">
+                <!-- Set 1 -->
+                <div class="country-pill"><img src="https://flagcdn.com/w40/us.png" alt="United States Flag" loading="lazy"> United States</div>
+                <div class="country-pill"><img src="https://flagcdn.com/w40/gb.png" alt="United Kingdom Flag" loading="lazy"> United Kingdom</div>
+                <div class="country-pill"><img src="https://flagcdn.com/w40/ca.png" alt="Canada Flag" loading="lazy"> Canada</div>
+                <div class="country-pill"><img src="https://flagcdn.com/w40/au.png" alt="Australia Flag" loading="lazy"> Australia</div>
+                <div class="country-pill"><img src="https://flagcdn.com/w40/sa.png" alt="Saudi Arabia Flag" loading="lazy"> Saudi Arabia</div>
+                <div class="country-pill"><img src="https://flagcdn.com/w40/fr.png" alt="France Flag" loading="lazy"> France</div>
+                <div class="country-pill"><img src="https://flagcdn.com/w40/de.png" alt="Germany Flag" loading="lazy"> Germany</div>
+                <div class="country-pill"><img src="https://flagcdn.com/w40/ae.png" alt="UAE Flag" loading="lazy"> UAE</div>
+                <div class="country-pill"><img src="https://flagcdn.com/w40/eg.png" alt="Egypt Flag" loading="lazy"> Egypt</div>
+                <div class="country-pill"><img src="https://flagcdn.com/w40/om.png" alt="Oman Flag" loading="lazy"> Oman</div>
+
+                <!-- Set 2 (Seamless Loop Duplicate) -->
+                <div class="country-pill" aria-hidden="true"><img src="https://flagcdn.com/w40/us.png" alt="" loading="lazy"> United States</div>
+                <div class="country-pill" aria-hidden="true"><img src="https://flagcdn.com/w40/gb.png" alt="" loading="lazy"> United Kingdom</div>
+                <div class="country-pill" aria-hidden="true"><img src="https://flagcdn.com/w40/ca.png" alt="" loading="lazy"> Canada</div>
+                <div class="country-pill" aria-hidden="true"><img src="https://flagcdn.com/w40/au.png" alt="" loading="lazy"> Australia</div>
+                <div class="country-pill" aria-hidden="true"><img src="https://flagcdn.com/w40/sa.png" alt="" loading="lazy"> Saudi Arabia</div>
+                <div class="country-pill" aria-hidden="true"><img src="https://flagcdn.com/w40/fr.png" alt="" loading="lazy"> France</div>
+                <div class="country-pill" aria-hidden="true"><img src="https://flagcdn.com/w40/de.png" alt="" loading="lazy"> Germany</div>
+                <div class="country-pill" aria-hidden="true"><img src="https://flagcdn.com/w40/ae.png" alt="" loading="lazy"> UAE</div>
+                <div class="country-pill" aria-hidden="true"><img src="https://flagcdn.com/w40/eg.png" alt="" loading="lazy"> Egypt</div>
+                <div class="country-pill" aria-hidden="true"><img src="https://flagcdn.com/w40/om.png" alt="" loading="lazy"> Oman</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+        
 
        <section id="page-learning" class="page-view">
     <div class="section-header" style="text-align: center; max-width: 720px; margin: 0 auto 3rem;">
@@ -2814,6 +3132,50 @@ document.addEventListener("keydown", function (e) {
         setTimeout(() => {
             rocketBtn.classList.remove("launching", "show");
         }, 750);
+    });
+})();
+
+/* ================= PORTFOLIO FILTER & AUTO-SELECT SERVICE ON QUOTE ================= */
+(function () {
+    const filterButtons = document.querySelectorAll("#portfolioFilters .filter-pill-btn");
+    const projectCards = document.querySelectorAll(".case-study-card");
+
+    filterButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            filterButtons.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+
+            const filter = btn.getAttribute("data-filter");
+            projectCards.forEach(card => {
+                if (filter === "all" || card.getAttribute("data-category") === filter) {
+                    card.classList.remove("hidden-project");
+                } else {
+                    card.classList.add("hidden-project");
+                }
+            });
+        });
+    });
+
+    // Clicking "Request Similar Results" navigates to Contact Us and pre-selects that service
+    document.querySelectorAll(".quote-service-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const serviceName = btn.getAttribute("data-prefill-service");
+            navigateToPage("contact", "Contact Us");
+
+            setTimeout(() => {
+                const hiddenInput = document.getElementById("serviceSelect");
+                const selectedText = document.getElementById("jellySelectedText");
+                const options = document.querySelectorAll("#jellyServiceDropdown .jelly-option");
+
+                if (hiddenInput && selectedText) {
+                    hiddenInput.value = serviceName;
+                    selectedText.textContent = serviceName;
+                    options.forEach(opt => {
+                        opt.classList.toggle("selected", opt.getAttribute("data-value") === serviceName);
+                    });
+                }
+            }, 300);
+        });
     });
 })();
 
