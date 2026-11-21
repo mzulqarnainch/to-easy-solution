@@ -1311,6 +1311,100 @@
         }
 
 
+        /* ================= BLOG PAGE & ARTICLE READER MODAL ================= */
+.blog-featured-banner {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    background: #FFFFFF;
+    border: 1.5px solid var(--border-sand);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: var(--shadow-warm);
+    margin-bottom: 2.8rem;
+}
+
+.blog-featured-img {
+    width: 100%;
+    height: 100%;
+    min-height: 310px;
+    object-fit: cover;
+}
+
+.blog-featured-content {
+    padding: 2.3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.blog-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+}
+
+.blog-tag-badge {
+    background: rgba(200, 109, 59, 0.12);
+    color: var(--accent-terracotta);
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.78rem;
+}
+
+.blog-card.hidden-blog {
+    display: none;
+}
+
+/* Full Article Modal */
+.blog-modal-box {
+    background: #FFFFFF;
+    border: 1px solid var(--border-sand);
+    border-radius: 24px;
+    max-width: 760px;
+    width: 100%;
+    max-height: 88vh;
+    overflow-y: auto;
+    padding: 2.4rem;
+    position: relative;
+    box-shadow: 0 25px 60px rgba(28, 25, 23, 0.25);
+}
+
+.blog-modal-cover {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 16px;
+    margin-bottom: 1.4rem;
+}
+
+.blog-modal-body p {
+    color: var(--text-dark);
+    line-height: 1.8;
+    margin-bottom: 1.1rem;
+    font-size: 0.98rem;
+}
+
+.blog-modal-body h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
+    margin: 1.4rem 0 0.6rem;
+    color: var(--text-dark);
+}
+
+@media (max-width: 920px) {
+    .blog-featured-banner {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+
         /* ================= DISABLE TEXT SELECTION & IMAGE DRAGGING ================= */
 body, body * {
     -webkit-user-select: none; /* Safari / Chrome */
@@ -1886,6 +1980,7 @@ img {
             <li><a class="nav-item" data-target="services" data-nav-label="Services">Services</a></li>
             <li><a class="nav-item" data-target="portfolio" data-nav-label="Portfolio">Portfolio</a></li>
             <li><a class="nav-item" data-target="learning" data-nav-label="Learning">Learning</a></li>
+            <li><a class="nav-item" data-target="blog" data-nav-label="Blog">Blog</a></li>
             <li><a class="nav-item" data-target="team" data-nav-label="Team">Team</a></li>
             <li><a class="nav-item" data-target="contact" data-nav-label="Contact Us">Contact Us</a></li>
         </ul>
@@ -2309,6 +2404,190 @@ img {
                 </div>
             </div>
         </section>
+
+
+        <!-- ==================== BLOG PAGE ==================== -->
+<section id="page-blog" class="page-view">
+    <div class="section-header">
+        <span class="hero-badge" style="margin-bottom: 0.8rem;">
+            <i class="fas fa-newspaper"></i>
+            <span>INSIGHTS &amp; PLAYBOOKS</span>
+        </span>
+        <h1>Growth, Outreach &amp; <span class="highlight-word">Ads Blog</span></h1>
+        <p>Actionable B2B lead generation strategies, cold email deliverability tips, CRM workflows, and paid ads frameworks from our agency team.</p>
+    </div>
+
+    <!-- Featured Article Banner -->
+    <div class="blog-featured-banner">
+        <img class="blog-featured-img" src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80" alt="B2B Outbound Playbook">
+        <div class="blog-featured-content">
+            <div class="blog-meta-row">
+                <span class="blog-tag-badge">Featured Guide</span>
+                <span><i class="far fa-calendar-alt"></i> Nov 2026</span>
+                <span><i class="far fa-clock"></i> 6 min read</span>
+            </div>
+            <h2 style="font-size: 1.85rem; line-height: 1.25; margin-bottom: 0.8rem;">
+                How to Build a Predictable B2B Outbound Engine Without Burning Your Domain
+            </h2>
+            <p style="color: var(--text-muted); line-height: 1.65; margin-bottom: 1.5rem;">
+                Discover the exact multi-domain setup, ICP list-building checklist, and 4-step LinkedIn + email cadence we use to book 30+ qualified enterprise demos every month.
+            </p>
+            <div>
+                <button type="button" class="btn-primary open-article-btn" data-article-id="featured-outbound">
+                    Read Full Article <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Category Filter Pills -->
+    <div class="portfolio-filters" id="blogFilters">
+        <button type="button" class="filter-pill-btn active" data-blog-filter="all">All Posts</button>
+        <button type="button" class="filter-pill-btn" data-blog-filter="lead-gen">Lead Generation</button>
+        <button type="button" class="filter-pill-btn" data-blog-filter="outreach">Cold Email &amp; LinkedIn</button>
+        <button type="button" class="filter-pill-btn" data-blog-filter="ads">Meta &amp; Google Ads</button>
+        <button type="button" class="filter-pill-btn" data-blog-filter="crm">CRM &amp; Data</button>
+    </div>
+
+    <!-- Blog Posts Grid -->
+    <div class="grid-cards">
+        <!-- Post 1 -->
+        <article class="cream-card blog-card" data-blog-category="outreach">
+            <div class="card-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80" alt="Cold Email Deliverability">
+                <div class="card-floating-icon"><i class="fas fa-envelope-open-text"></i></div>
+            </div>
+            <div class="card-body">
+                <div class="blog-meta-row">
+                    <span class="blog-tag-badge">Cold Email</span>
+                    <span>4 min read</span>
+                </div>
+                <h3>SPF, DKIM &amp; DMARC Checklist for 98% Inbox Placement</h3>
+                <p>Stop landing in spam. Follow this step-by-step authentication and inbox warm-up protocol before launching your next cold email sequence.</p>
+                <div class="card-action-link open-article-btn" data-article-id="email-deliverability">
+                    Read Article <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
+        </article>
+
+        <!-- Post 2 -->
+        <article class="cream-card blog-card" data-blog-category="lead-gen">
+            <div class="card-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=800&q=80" alt="B2B Lead Generation">
+                <div class="card-floating-icon"><i class="fas fa-bullseye"></i></div>
+            </div>
+            <div class="card-body">
+                <div class="blog-meta-row">
+                    <span class="blog-tag-badge">Lead Generation</span>
+                    <span>5 min read</span>
+                </div>
+                <h3>How We Keep B2B Bounce Rates Under 0.8% Across 250K+ Leads</h3>
+                <p>Learn our 3-layer human and waterfall verification workflow to eliminate invalid contacts and protect your sender reputation.</p>
+                <div class="card-action-link open-article-btn" data-article-id="zero-bounce-leads">
+                    Read Article <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
+        </article>
+
+        <!-- Post 3 -->
+        <article class="cream-card blog-card" data-blog-category="ads">
+            <div class="card-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="Meta and Google Ads">
+                <div class="card-floating-icon"><i class="fas fa-bullhorn"></i></div>
+            </div>
+            <div class="card-body">
+                <div class="blog-meta-row">
+                    <span class="blog-tag-badge">Meta &amp; Google Ads</span>
+                    <span>5 min read</span>
+                </div>
+                <h3>Lowering Cost-Per-Lead by 40% Using Instant WhatsApp Funnels</h3>
+                <p>Why routing high-intent Meta Lead Ads and Google Search clicks directly into WhatsApp dramatically improves speed-to-lead and close rates.</p>
+                <div class="card-action-link open-article-btn" data-article-id="whatsapp-ad-funnels">
+                    Read Article <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
+        </article>
+
+        <!-- Post 4 -->
+        <article class="cream-card blog-card" data-blog-category="crm">
+            <div class="card-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=800&q=80" alt="CRM Hygiene">
+                <div class="card-floating-icon"><i class="fas fa-database"></i></div>
+            </div>
+            <div class="card-body">
+                <div class="blog-meta-row">
+                    <span class="blog-tag-badge">CRM &amp; Data</span>
+                    <span>4 min read</span>
+                </div>
+                <h3>5 HubSpot &amp; Salesforce Hygiene Rules That Save Reps 10+ Hours/Week</h3>
+                <p>Duplicate contacts and missing job titles stall deals. Use these automated enrichment and lifecycle rules to keep your pipeline spotless.</p>
+                <div class="card-action-link open-article-btn" data-article-id="crm-hygiene-rules">
+                    Read Article <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
+        </article>
+
+        <!-- Post 5 -->
+        <article class="cream-card blog-card" data-blog-category="outreach">
+            <div class="card-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1611944212129-29977ae1398c?auto=format&fit=crop&w=800&q=80" alt="LinkedIn Social Selling">
+                <div class="card-floating-icon"><i class="fa-brands fa-linkedin"></i></div>
+            </div>
+            <div class="card-body">
+                <div class="blog-meta-row">
+                    <span class="blog-tag-badge">LinkedIn Outreach</span>
+                    <span>5 min read</span>
+                </div>
+                <h3>Non-Salesy LinkedIn Connection Scripts That Get 40%+ Acceptance</h3>
+                <p>Ditch the instant pitch slap. See the conversational openers our SDRs use to turn C-suite connections into booked discovery calls.</p>
+                <div class="card-action-link open-article-btn" data-article-id="linkedin-scripts">
+                    Read Article <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
+        </article>
+
+        <!-- Post 6 -->
+        <article class="cream-card blog-card" data-blog-category="lead-gen">
+            <div class="card-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=800&q=80" alt="B2B Expansion">
+                <div class="card-floating-icon"><i class="fas fa-chart-line"></i></div>
+            </div>
+            <div class="card-body">
+                <div class="blog-meta-row">
+                    <span class="blog-tag-badge">Business Growth</span>
+                    <span>6 min read</span>
+                </div>
+                <h3>Expanding Into US, UK &amp; GCC Markets: Outbound Localization Guide</h3>
+                <p>Timing, messaging tone, and compliance differences when running B2B outreach across North America, Europe, and the Middle East.</p>
+                <div class="card-action-link open-article-btn" data-article-id="global-outbound-guide">
+                    Read Article <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>
+
+<!-- BLOG FULL ARTICLE MODAL -->
+<div class="modal-overlay" id="blogArticleModal">
+    <div class="blog-modal-box">
+        <button class="modal-close" id="closeBlogModal" aria-label="Close article"><i class="fas fa-times"></i></button>
+        <img id="blogModalImg" class="blog-modal-cover" src="" alt="Article Cover">
+        <div class="blog-meta-row">
+            <span class="blog-tag-badge" id="blogModalCategory">Category</span>
+            <span id="blogModalDate">Nov 2026</span>
+        </div>
+        <h2 id="blogModalTitle" style="font-size: 1.75rem; line-height: 1.25; margin-bottom: 1.2rem;"></h2>
+        <div id="blogModalBody" class="blog-modal-body"></div>
+        <div style="margin-top: 1.8rem; padding-top: 1.3rem; border-top: 1px solid var(--border-sand); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            <span style="font-weight: 600; color: var(--text-muted);">Need help implementing this?</span>
+            <button type="button" class="btn-primary" id="blogModalCtaBtn">
+                Talk to Our Team <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+
 
         <!-- ==================== 3. TEAM PAGE ==================== -->
 <section id="page-team" class="page-view">
@@ -3178,6 +3457,151 @@ document.addEventListener("keydown", function (e) {
             }, 300);
         });
     });
+})();
+
+
+/* ================= BLOG FILTERING & FULL ARTICLE READER ================= */
+(function () {
+    const blogArticlesData = {
+        "featured-outbound": {
+            category: "Featured Guide",
+            date: "Nov 2026 • 6 min read",
+            img: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80",
+            title: "How to Build a Predictable B2B Outbound Engine Without Burning Your Domain",
+            body: `
+                <p>Relying solely on referrals creates unpredictable revenue peaks and valleys. A structured outbound engine solves this by putting your offer directly in front of verified decision-makers every single week.</p>
+                <h4>1. Isolate Your Sending Infrastructure</h4>
+                <p>Never send cold outreach from your primary corporate domain. Register 2–3 secondary domains, configure SPF, DKIM, and DMARC records, and warm them up for at least 14 days before launching campaigns.</p>
+                <h4>2. Hyper-Segment Your ICP List</h4>
+                <p>Instead of blasting 10,000 generic contacts, segment prospects by industry, headcount, and trigger events (such as recent funding or hiring). Smaller, verified lists consistently generate 3x higher positive reply rates.</p>
+                <h4>3. Combine Email With LinkedIn Touchpoints</h4>
+                <p>Prospects who see your profile view or connection note on LinkedIn before receiving your email are significantly more likely to reply. Keep messages under 90 words and focus on a single, clear problem you solve.</p>
+            `
+        },
+        "email-deliverability": {
+            category: "Cold Email",
+            date: "Nov 2026 • 4 min read",
+            img: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80",
+            title: "SPF, DKIM & DMARC Checklist for 98% Inbox Placement",
+            body: `
+                <p>Even the best cold email copy fails if Google Workspace or Microsoft 365 routes your message straight to spam. Technical authentication is mandatory for modern email outreach.</p>
+                <h4>Essential Authentication Trio</h4>
+                <p><strong>SPF</strong> authorizes which mail servers can send on behalf of your domain. <strong>DKIM</strong> adds a cryptographic signature proving the email was not altered in transit. <strong>DMARC</strong> instructs receiving servers how to handle unauthenticated mail.</p>
+                <h4>Daily Volume Limits</h4>
+                <p>Cap daily sending at 30–40 emails per inbox per day and avoid heavy HTML templates or unverified tracking domains.</p>
+            `
+        },
+        "zero-bounce-leads": {
+            category: "Lead Generation",
+            date: "Nov 2026 • 5 min read",
+            img: "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=800&q=80",
+            title: "How We Keep B2B Bounce Rates Under 0.8% Across 250K+ Leads",
+            body: `
+                <p>A bounce rate above 3% signals to inbox providers that your list is outdated, rapidly hurting deliverability across all active campaigns.</p>
+                <h4>Our 3-Layer Verification Process</h4>
+                <p>First, we cross-reference company tenure on LinkedIn to confirm the decision-maker still holds the role. Second, we run SMTP syntax and server-level pings. Third, catch-all domains are manually validated before entering your CRM.</p>
+            `
+        },
+        "whatsapp-ad-funnels": {
+            category: "Meta & Google Ads",
+            date: "Nov 2026 • 5 min read",
+            img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
+            title: "Lowering Cost-Per-Lead by 40% Using Instant WhatsApp Funnels",
+            body: `
+                <p>Traditional landing pages often suffer from form abandonment on mobile devices. Routing high-intent Meta and Google Ads clicks directly into a pre-filled WhatsApp conversation removes friction.</p>
+                <h4>Speed-to-Lead Wins Deals</h4>
+                <p>Responding within 5 minutes increases lead qualification rates dramatically. Combining Click-to-WhatsApp ads with CRM tagging gives your sales team instant context on which ad campaign generated the inquiry.</p>
+            `
+        },
+        "crm-hygiene-rules": {
+            category: "CRM & Data",
+            date: "Nov 2026 • 4 min read",
+            img: "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=800&q=80",
+            title: "5 HubSpot & Salesforce Hygiene Rules That Save Reps 10+ Hours/Week",
+            body: `
+                <p>Cluttered CRMs slow down follow-ups and distort revenue forecasting. Standardizing your database structure pays off immediately.</p>
+                <h4>Key Automation Practices</h4>
+                <p>Enforce unique email and domain deduplication rules, standardize country and industry picklists, and archive unresponsive leads after 90 days so sales reps focus strictly on active pipeline opportunities.</p>
+            `
+        },
+        "linkedin-scripts": {
+            category: "LinkedIn Outreach",
+            date: "Nov 2026 • 5 min read",
+            img: "https://images.unsplash.com/photo-1611944212129-29977ae1398c?auto=format&fit=crop&w=800&q=80",
+            title: "Non-Salesy LinkedIn Connection Scripts That Get 40%+ Acceptance",
+            body: `
+                <p>Decision-makers ignore connection requests that immediately pitch a service. Relevance and brevity win attention.</p>
+                <h4>Proven Connection Framework</h4>
+                <p>Reference a shared industry niche, recent company milestone, or specific operational goal—without attaching links in the first message. Once connected, ask a low-friction diagnostic question before offering a call.</p>
+            `
+        },
+        "global-outbound-guide": {
+            category: "Business Growth",
+            date: "Nov 2026 • 6 min read",
+            img: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=800&q=80",
+            title: "Expanding Into US, UK & GCC Markets: Outbound Localization Guide",
+            body: `
+                <p>Each region responds to different outreach dynamics. North American buyers prefer direct, ROI-focused messaging sent between 8:00 AM and 11:00 AM local time.</p>
+                <h4>Regional Nuances</h4>
+                <p>UK & European prospects value GDPR-compliant data sourcing and consultative framing, while GCC decision-makers (UAE, Saudi Arabia, Oman) respond strongly to executive LinkedIn credibility and direct WhatsApp follow-ups.</p>
+            `
+        }
+    };
+
+    // Category filter buttons
+    const blogFilterBtns = document.querySelectorAll("#blogFilters .filter-pill-btn");
+    const blogCards = document.querySelectorAll(".blog-card");
+
+    blogFilterBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            blogFilterBtns.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            const filter = btn.getAttribute("data-blog-filter");
+
+            blogCards.forEach(card => {
+                if (filter === "all" || card.getAttribute("data-blog-category") === filter) {
+                    card.classList.remove("hidden-blog");
+                } else {
+                    card.classList.add("hidden-blog");
+                }
+            });
+        });
+    });
+
+    // Open full article modal
+    const modal = document.getElementById("blogArticleModal");
+    const closeBtn = document.getElementById("closeBlogModal");
+    const ctaBtn = document.getElementById("blogModalCtaBtn");
+
+    document.querySelectorAll(".open-article-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const article = blogArticlesData[btn.getAttribute("data-article-id")];
+            if (!article || !modal) return;
+
+            document.getElementById("blogModalImg").src = article.img;
+            document.getElementById("blogModalCategory").textContent = article.category;
+            document.getElementById("blogModalDate").textContent = article.date;
+            document.getElementById("blogModalTitle").textContent = article.title;
+            document.getElementById("blogModalBody").innerHTML = article.body;
+
+            modal.classList.add("open");
+        });
+    });
+
+    if (closeBtn) {
+        closeBtn.addEventListener("click", () => modal.classList.remove("open"));
+    }
+    if (modal) {
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) modal.classList.remove("open");
+        });
+    }
+    if (ctaBtn) {
+        ctaBtn.addEventListener("click", () => {
+            modal.classList.remove("open");
+            navigateToPage("contact", "Contact Us");
+        });
+    }
 })();
 
         
