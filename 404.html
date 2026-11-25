@@ -199,6 +199,63 @@
       color: #C86D3B;
     }
   </style>
+  <script>
+  (function () {
+    // Normalize path: lowercase and remove trailing slash (except root "/")
+    const rawPath = window.location.pathname.toLowerCase();
+    const cleanPath = rawPath.length > 1 ? rawPath.replace(/\/+$/, "") : rawPath;
+
+    // 1. All Admin / Login / CMS / System probes (all paths preserved & deduplicated)
+    const blockedOrAdminPaths = [
+      "/admin", "/admin.php", "/admin.html", "/admin-login", "/admin_login",
+      "/admin/login", "/admin/login.php", "/admin/index.php", "/admin/dashboard",
+      "/admin/signin", "/admin/auth", "/adminpanel", "/admin-panel",
+      "/admin_area", "/adminarea", "/administrator", "/administrator/login",
+      "/administrator/index.php", "/admin-console", "/admincenter",
+      "/admincp", "/admin_cp", "/admin-home", "/app/admin", "/api/admin",
+      "/site-admin", "/webadmin", "/secure-admin", "/superadmin", "/super-admin",
+      "/login", "/login.php", "/login.html", "/signin", "/sign-in", "/sign_in",
+      "/signin.php", "/auth", "/auth/login", "/authentication",
+      "/user/login", "/users/login", "/users/sign_in", "/account/login",
+      "/app/login", "/api/login", "/wp-login.php", "/wp-admin",
+      "/wp-admin/admin.php", "/wp-admin/profile.php", "/joomla/administrator",
+      "/drupal/admin", "/cms", "/cms/admin", "/cms/login", "/cms/dashboard",
+      "/content-manager", "/content-management", "/site-management", "/webmaster",
+      "/dashboard", "/dashboard.php", "/user/dashboard", "/control",
+      "/control-panel", "/controlpanel", "/panel", "/userpanel", "/user-panel",
+      "/management", "/management/login", "/manage", "/manage.php",
+      "/manager", "/manager/login", "/backoffice", "/back-office",
+      "/backend", "/console", "/cpanel", "/staff", "/staff/login",
+      "/staff/dashboard", "/employee", "/employee/login", "/portal",
+      "/portal/login", "/user", "/users", "/members", "/members/login",
+      "/member-area", "/moderator", "/moderator/login", "/operator",
+      "/support", "/support/login", "/system", "/system/admin",
+      "/system/login", "/settings", "/config", "/configuration",
+      "/private", "/internal", "/secure", "/secure/login", "/root"
+    ];
+
+    if (blockedOrAdminPaths.some(item => cleanPath === item || cleanPath.startsWith(item + "/"))) {
+      window.location.replace("https://toeasysolution.com/index.html");
+      return;
+    }
+
+    // 2. Helpful shortcuts if a client types a clean word without ".html"
+    const cleanShortcuts = {
+      "/services": "https://toeasysolution.com/services.html",
+      "/service": "https://toeasysolution.com/services.html",
+      "/contact": "https://toeasysolution.com/contact.html",
+      "/portfolio": "https://toeasysolution.com/portfolio.html",
+      "/learning": "https://toeasysolution.com/learning.html",
+      "/blog": "https://toeasysolution.com/blog.html",
+      "/team": "https://toeasysolution.com/team.html"
+    };
+
+    if (cleanShortcuts[cleanPath]) {
+      window.location.replace(cleanShortcuts[cleanPath]);
+      return;
+    }
+  })();
+  </script>
 </head>
 <body oncontextmenu="return false;">
 
