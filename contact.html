@@ -100,15 +100,67 @@
 
             <form id="contactForm">
                 <div class="form-group">
-                    <label for="name">Full Name</label>
+                    <label for="name">Full Name <span style="color: #C86D3B;">*</span>
+                    </label>
                     <input type="text" id="name" required placeholder="Enter your full name">
                 </div>
                 <div class="form-group">
-                    <label for="email">Work Email</label>
+                    <label for="email">Work Email <span style="color: #C86D3B;">*</span>
+                    </label>
                     <input type="email" id="email" required placeholder="you@company.com">
                 </div>
-                <div class="form-group">
-                    <label>Service Needed</label>
+
+
+                <!-- ================= INDUSTRY SELECTOR FIELD ================= -->
+<div class="form-group" style="margin-bottom: 20px;">
+  <label for="industrySelect" style="display: block; font-weight: 600; color: #1C1917; margin-bottom: 8px; font-size: 0.95rem;">
+    Your Industry <span style="color: #C86D3B;">*</span>
+  </label>
+  <select id="industrySelect" name="industry" required
+    style="width: 100%; padding: 14px 16px; border-radius: 12px; border: 1.5px solid #E7E5E4; background-color: #FAF6F0; color: #1C1917; font-size: 0.98rem; font-family: inherit; outline: none; cursor: pointer; transition: border-color 0.25s ease, box-shadow 0.25s ease;">
+    <option value="" disabled selected>-- Select Your Industry --</option>
+    <option value="B2B SaaS & Technology">B2B SaaS &amp; Technology</option>
+    <option value="Digital Marketing & Creative Agency">Digital Marketing &amp; Creative Agency</option>
+    <option value="Real Estate & Construction">Real Estate &amp; Construction</option>
+    <option value="E-Commerce & Retail">E-Commerce &amp; Retail</option>
+    <option value="Healthcare & Medical Services">Healthcare &amp; Medical Services</option>
+    <option value="Finance, Accounting & Legal">Finance, Accounting &amp; Legal</option>
+    <option value="Logistics, Supply Chain & Manufacturing">Logistics, Supply Chain &amp; Manufacturing</option>
+    <option value="Consulting & Recruitment">Consulting &amp; Recruitment</option>
+    <option value="Education & E-Learning">Education &amp; E-Learning</option>
+    <option value="Hospitality, Travel & Events">Hospitality, Travel &amp; Events</option>
+    <option value="Other Industry">Other Industry</option>
+  </select>
+
+
+  <!-- ================= COUNTRY SELECTOR FIELD ================= -->
+<div class="form-group" style="margin-bottom: 20px;">
+  <label for="countrySelect" style="display: block; font-weight: 600; color: #1C1917; margin-bottom: 8px; font-size: 0.95rem;">
+    Your Country <span style="color: #C86D3B;">*</span>
+  </label>
+  <select id="countrySelect" name="country" required
+    style="width: 100%; padding: 14px 16px; border-radius: 12px; border: 1.5px solid #E7E5E4; background-color: #FAF6F0; color: #1C1917; font-size: 0.98rem; font-family: inherit; outline: none; cursor: pointer; transition: border-color 0.25s ease, box-shadow 0.25s ease;">
+    <option value="" disabled selected>-- Select Your Country --</option>
+    <option value="United States">United States</option>
+    <option value="United Kingdom">United Kingdom</option>
+    <option value="Canada">Canada</option>
+    <option value="Australia">Australia</option>
+    <option value="Saudi Arabia">Saudi Arabia</option>
+    <option value="United Arab Emirates">United Arab Emirates</option>
+    <option value="France">France</option>
+    <option value="Germany">Germany</option>
+    <option value="Egypt">Egypt</option>
+    <option value="Oman">Oman</option>
+    <option value="Pakistan">Pakistan</option>
+    <option value="Other Country">Other Country</option>
+  </select>
+</div>
+
+
+</div>
+              <div class="form-group">
+                    <label>Service Needed <span style="color: #C86D3B;">*</span>
+                    </label>
                     <input type="hidden" id="serviceSelect" value="Lead Generation">
 
                     <div class="jelly-select-wrapper" id="jellyServiceDropdown">
@@ -197,7 +249,8 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="message">Project Details</label>
+                    <label for="message">Project Details <span style="color: #C86D3B;">*</span>
+                    </label>
                     <textarea id="message" rows="4" required placeholder="Tell us about your target audience, CRM, or ad goals..."></textarea>
                 </div>
                 <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; background: #25D366; box-shadow: 0 8px 20px rgba(37, 211, 102, 0.28);">
