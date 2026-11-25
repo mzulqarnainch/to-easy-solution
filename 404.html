@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Page Not Found | To Easy Solution</title>
+  <meta name="robots" content="noindex, follow">
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #FAF6F0;
+      color: #1C1917;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Ambient Floating Shapes */
+    .bg-shape {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      animation: floatSlow 12s ease-in-out infinite;
+    }
+    .shape-1 {
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(200, 109, 59, 0.16), transparent 70%);
+      top: 8%;
+      left: 6%;
+    }
+    .shape-2 {
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(217, 155, 82, 0.15), transparent 70%);
+      bottom: 6%;
+      right: 5%;
+      animation-delay: -5s;
+    }
+
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-20px) scale(1.04); }
+    }
+
+    /* Main Card */
+    .error-card {
+      position: relative;
+      z-index: 2;
+      max-width: 580px;
+      width: 100%;
+      background: #FFFFFF;
+      border: 1px solid #E7E5E4;
+      border-radius: 24px;
+      padding: 46px 36px;
+      text-align: center;
+      box-shadow: 0 22px 55px rgba(28, 25, 23, 0.08);
+    }
+
+    .brand-header {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #1C1917;
+      font-weight: 800;
+      font-size: 1.15rem;
+      margin-bottom: 24px;
+    }
+
+    .brand-header img {
+      height: 40px;
+      width: auto;
+      border-radius: 8px;
+    }
+
+    .error-code {
+      font-size: clamp(4.5rem, 11vw, 6.5rem);
+      font-weight: 800;
+      line-height: 1;
+      background: linear-gradient(135deg, #C86D3B, #E09145);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+      letter-spacing: -0.03em;
+    }
+
+    .error-badge {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(200, 109, 59, 0.12);
+      color: #C86D3B;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-size: 1.65rem;
+      color: #1C1917;
+      margin-bottom: 12px;
+    }
+
+    p {
+      color: #57534E;
+      font-size: 1rem;
+      line-height: 1.65;
+      margin-bottom: 28px;
+    }
+
+    .action-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 26px;
+      background: #C86D3B;
+      color: #FFFFFF;
+      text-decoration: none;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      box-shadow: 0 8px 20px rgba(200, 109, 59, 0.28);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .btn-primary:hover {
+      background: #B35C2D;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 24px;
+      background: #FAF6F0;
+      color: #1C1917;
+      text-decoration: none;
+      border: 1px solid #E7E5E4;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      border-color: #C86D3B;
+      transform: translateY(-2px);
+    }
+
+    .quick-links {
+      border-top: 1px solid #E7E5E4;
+      padding-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 18px;
+      font-size: 0.9rem;
+    }
+
+    .quick-links a {
+      color: #57534E;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    .quick-links a:hover {
+      color: #C86D3B;
+    }
+  </style>
+</head>
+<body oncontextmenu="return false;">
+
+  <div class="bg-shape shape-1"></div>
+  <div class="bg-shape shape-2"></div>
+
+  <main class="error-card">
+    <a href="/index.html" class="brand-header">
+      <img src="/logo.png" alt="To Easy Solution Logo">
+      <span>To Easy Solution</span>
+    </a>
+
+    <div><span class="error-badge">404 Error</span></div>
+    <div class="error-code">404</div>
+    <h1>Page Not Found</h1>
+    <p>
+      The page or URL you entered does not exist on <strong>To Easy Solution</strong>. It may have been moved, renamed, or typed incorrectly.
+    </p>
+
+    <div class="action-buttons">
+      <a href="/index.html" class="btn-primary">
+        <i class="fas fa-home"></i> Back to Home
+      </a>
+      <a href="https://wa.me/923008285784?text=Hi%20To%20Easy%20Solution!%20I%20need%20help%20finding%20a%20page%20on%20your%20website." target="_blank" rel="noopener noreferrer" class="btn-secondary">
+        <i class="fab fa-whatsapp" style="color: #25D366; font-size: 1.1rem;"></i> Chat on WhatsApp
+      </a>
+    </div>
+
+    <nav class="quick-links" aria-label="Website Navigation">
+      <a href="/index.html">Home</a>
+      <a href="/services.html">Services</a>
+      <a href="/portfolio.html">Portfolio</a>
+      <a href="/learning.html">Learning</a>
+      <a href="/blog.html">Blog</a>
+      <a href="/contact.html">Contact Us</a>
+    </nav>
+  </main>
+
+</body>
+</html>
