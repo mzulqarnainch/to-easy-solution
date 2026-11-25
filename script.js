@@ -7,6 +7,8 @@ if (contactForm) {
 
         const name = document.getElementById("name").value.trim();
         const email = document.getElementById("email").value.trim();
+        const industry = document.getElementById("industrySelect")?.value || "Not Specified";
+        const country = document.getElementById("countrySelect")?.value || "Not Specified";
         const service = document.getElementById("serviceSelect").value;
         const message = document.getElementById("message").value.trim();
 
@@ -14,6 +16,8 @@ if (contactForm) {
             `*New Inquiry - To Easy Solution*%0A%0A` +
             `*Name:* ${encodeURIComponent(name)}%0A` +
             `*Email:* ${encodeURIComponent(email)}%0A` +
+            `*Industry:* ${encodeURIComponent(industry)}%0A` +
+            `*Country:* ${encodeURIComponent(country)}%0A` +
             `*Service:* ${encodeURIComponent(service)}%0A` +
             `*Details:* ${encodeURIComponent(message)}`;
 
